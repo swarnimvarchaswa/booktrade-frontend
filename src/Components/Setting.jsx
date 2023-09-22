@@ -15,9 +15,9 @@ function Setting({login}) {
     <div className="container max-w-md mx-auto my-4">
       <div className="flex flex-clo ">
         <div>
-          <h1 className="text-left text-xl font-r tracking-wide text-gray-700 px-4">
+          <p className="text-left text-xl my-4 font-r tracking-wide text-gray-700 px-4">
             Manage your Account
-          </h1>
+          </p>
           <Link
             to="/editprofile"
             className="flex flex-row gap-4 px-8 py-4  font-r tracking-wide hover:text-purple-500 "
