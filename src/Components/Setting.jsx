@@ -15,7 +15,7 @@ function Setting({login}) {
     <div className="container max-w-md mx-auto my-4">
       <div className="flex flex-clo ">
         <div>
-          <h1 className="text-left font-r tracking-wide text-gray-700 px-4">
+          <p className="text-left font-r text-lg tracking-wide text-gray-700 px-4">
             Manage your Account
           </p>
           <Link
