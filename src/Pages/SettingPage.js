@@ -22,7 +22,7 @@ function SettingPage() {
         <Navbar />
       <Setting />
       <BottomNavbar />
-      <div className="max-w-md mx-auto px-2 mt-12">
+      <div className="max-w-md mx-auto px-2 pt-8 mt-12">
         <p className="font-r text-lg mt-6 text-slate-400">© 2023 BookTrade</p>
         <p className="font-r text-lg mb-4 text-gray-400">
           Designed & Developed by <Link
