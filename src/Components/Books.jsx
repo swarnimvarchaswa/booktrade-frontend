@@ -121,7 +121,7 @@ function BookList({ data, loggedInUserId }) {
                 </div>
                 <div className="">
                   <button
-                    className="bg-purple-600 text-white rounded px-4 py-2 mt-2 "
+                    className="bg-purple-600 text-white rounded px-4 py-2 mt-2 line-clamp-1 "
                     onClick={() => {
                       handleGetThisBookClick(book);
                     }}
