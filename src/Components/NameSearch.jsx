@@ -26,7 +26,7 @@ function People() {
 
   return (
     <div className="max-w-md mx-auto px-4 pt-4">
-      {chats.map((chat) => (
+      {Array.isArray(chats) && chats.map((chat) => (
         <div key={chat._id}>
           <div className="flex flex-row border-0 rounded-lg py-1 my-2 hover:bg-purple-100 focus:bg-purple-100">
             <div className="basis-1/4 flex justify-center">
