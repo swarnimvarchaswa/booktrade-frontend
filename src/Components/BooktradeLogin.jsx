@@ -27,6 +27,7 @@ function Login() {
     if (!emailRegex.test(email)) {
       // notifyA("Invalid email");
       setinvalidEmail("Enter Valid Email");
+      setIsLoading(false);
       return;
     }
 
@@ -46,10 +47,13 @@ function Login() {
         if (data.error) {
           if (data.error === "EmailError") {
             setEmailError("Email don't match");
+            setIsLoading(false);
           } else if (data.error === "OverallError") {
             setOverallError("Please enter email and password");
+            setIsLoading(false);
           } else if (data.error === "PasswordError") {
             setPasswordError("Enter Correct password");
+            setIsLoading(false);
           }
           // notifyA(data.error);
         } else {
@@ -116,8 +120,8 @@ function Login() {
         <div className="grid justify-stretch mt-10 font-r tracking-wider">
           <button
             className={`${
-              isLoading ? "bg-purple-600" : "bg-purple-400"
-            } bg-purple-600 text-white py-3 px-4 rounded hover:bg-purple-700`}
+              isLoading ? "bg-purple-500" : "bg-purple-600"
+            } text-white py-3 px-4 rounded hover:bg-purple-700 flex items-center justify-center`}
             onClick={() => {
               postData();
             }}
@@ -125,6 +129,7 @@ function Login() {
           >
             {isLoading ? (
               <img
+              className="h-5 w-5"
                 src="https://res.cloudinary.com/booktrade/image/upload/v1695467046/loading-50_up1ozs.gif"
                 alt="Loading"
               /> // Replace with your loading image path
