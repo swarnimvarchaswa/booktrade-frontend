@@ -121,12 +121,14 @@ function BookList({ data, loggedInUserId }) {
                 </div>
                 <div className="">
                   <button
-                    className="bg-purple-600 text-white rounded px-4 py-2 mt-2 line-clamp-1 "
+                    className="bg-purple-600 text-white rounded px-4 py-2 mt-2"
                     onClick={() => {
                       handleGetThisBookClick(book);
                     }}
                   >
-                    {isOwner ? "Manage your book" : "Get this Book"}
+                    <span className="line-clamp-1">
+                      {isOwner ? "Manage your book" : "Get this Book"}
+                    </span>
                   </button>
                 </div>
               </div>
