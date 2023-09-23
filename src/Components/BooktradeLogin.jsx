@@ -1,4 +1,4 @@
-import React, { useState} from "react"; //, useContext 
+import React, { useState } from "react"; //, useContext
 import { Link, useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 // import { LoginContext } from "../context/loginContext";
@@ -12,6 +12,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [overallError, setOverallError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const emailRegex = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/; // old regex
 
@@ -20,6 +21,7 @@ function Login() {
     setEmailError("");
     setPasswordError("");
     setOverallError("");
+    setIsLoading(true);
 
     //checking email
     if (!emailRegex.test(email)) {
@@ -55,6 +57,7 @@ function Login() {
           // console.log(data);
           localStorage.setItem("jwt", data);
           // setUserLogin(true)
+          setIsLoading(false);
           navigate("/");
         }
         // console.log(data);
@@ -112,12 +115,22 @@ function Login() {
         </div>
         <div className="grid justify-stretch mt-10 font-r tracking-wider">
           <button
-            className="bg-purple-600 text-white py-3 px-4 rounded hover:bg-purple-700"
+            className={`${
+              isLoading ? "bg-purple-600" : "bg-purple-400"
+            } bg-purple-600 text-white py-3 px-4 rounded hover:bg-purple-700`}
             onClick={() => {
               postData();
             }}
+            disabled={isLoading}
           >
-            Log In
+            {isLoading ? (
+              <img
+                src="https://res.cloudinary.com/booktrade/image/upload/v1695467046/loading-50_up1ozs.gif"
+                alt="Loading"
+              /> // Replace with your loading image path
+            ) : (
+              "Log In"
+            )}
           </button>
         </div>
 
