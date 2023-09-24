@@ -196,7 +196,7 @@ export default function ChatBox() {
         <div className="fixed w-full">
           <Link
             to={`/user/${otherUserId}`}
-            className="flex fixed items-center bg-white"
+            className="flex items-center bg-white"
           >
             <img
               src={otherUserProfilePic}
