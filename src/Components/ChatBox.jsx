@@ -203,8 +203,8 @@ export default function ChatBox() {
               alt="User's Image"
               className="w-12 h-12 rounded-full ml-[3vw] mr-2"
             />
-            <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700 line-clamp-1">
-              {otherUserName}
+            <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
+            <span className="line-clamp-1">{otherUserName}</span>
             </h3>
           </Link>
         </div>
