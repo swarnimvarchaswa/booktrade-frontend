@@ -214,7 +214,7 @@ export default function ChatBox() {
           <br />
           <br />
           <p className="font-r text-sm lg:text-base font-normal text-gray-300">
-            Messages will disappear on their own after a month.
+            Messages will disappear on their own in 24 hr.
           </p>
           <br />
 
