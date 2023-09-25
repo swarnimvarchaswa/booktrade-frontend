@@ -11,6 +11,7 @@ export default function HomePage() {
   const [data, setData] = useState([]);
   const [loggedInUserId, setLoggedInUserId] = useState(null);
 
+
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!token) {
@@ -92,13 +93,14 @@ export default function HomePage() {
       <div className="max-w-md mx-auto px-2 ">
         <p className="font-r text-lg mt-6 text-slate-400">© 2023 BookTrade</p>
         <p className="font-r text-lg mb-4 text-gray-400">
-          Designed & Developed by <Link
-          to="https://www.linkedin.com/in/swarnim-varchaswa-59a086228/"
-          target="_blank"
-          className="text-purple-400 font-normal"
-        >
-          Swarnim Varchaswa
-        </Link>
+          Designed & Developed by{" "}
+          <Link
+            to="https://www.linkedin.com/in/swarnim-varchaswa-59a086228/"
+            target="_blank"
+            className="text-purple-400 font-normal"
+          >
+            Swarnim Varchaswa
+          </Link>
         </p>
       </div>
       <BottomNavbar />

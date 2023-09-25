@@ -15,6 +15,7 @@ const BookForm = () => {
   const [bookConditionError, setBookConditionError] = useState("");
   const [bookCoverColor, setBookCoverColor] = useState("");
   const [bookCoverColorError, setBookCoverColorError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateFields = () => {
     let isValid = true;
@@ -49,6 +50,7 @@ const BookForm = () => {
         bookCoverColor &&
         bookCover
       ) {
+        setIsLoading(true);  
 
         const data = new FormData();
         data.append("file", bookCover);
@@ -62,7 +64,7 @@ const BookForm = () => {
           .then((data) => setUrl(data.url))
           .catch((err) => console.log(err));
       } else {
-        console.log("Enter all the details");
+        // console.log("Enter all the details");
       }
     }
   };
@@ -93,19 +95,25 @@ const BookForm = () => {
             console.log(data.error);
             if (data.error === "bookNameError") {
               setBookNameError("Enter Book Name");
+              setIsLoading(false);
             } else if (data.error === "authorNameError") {
               setAuthorNameError("Enter Author Name");
+              setIsLoading(false);
             } else if (data.error === "urlError") {
               setUrlError("Something went wrong");
+            
             } else if (data.error === "bookConditionError") {
               setBookConditionError("Choose your boook Status");
+              setIsLoading(false);
             } else if (data.error === "bookCoverColorError") {
               setBookCoverColorError("Choose your book cover color");
+              setIsLoading(false);
             }
             // error messages
           } else {
             //success messsage
             navigate("/profile");
+            setIsLoading(false);
           }
         })
         .catch((err) => console.log(err));
@@ -279,7 +287,7 @@ const BookForm = () => {
       </div>
       <div className="grid justify-streatch mt-10 font-r tracking-wider">
         <button
-          className="bg-purple-600 hover:bg-purple-700 text-white text-lg py-2 px-4 rounded-md"
+          className={`${isLoading ? "bg-purple-400 py-[1px]" : "bg-purple-600 py-3  hover:bg-purple-700"} text-white text-lg rounded-md flex items-center justify-center`}
           onClick={() => {
             setBookNameError("");
             setAuthorNameError("");
@@ -291,8 +299,18 @@ const BookForm = () => {
               postDetails();
             }
           }}
+          disabled={isLoading}
         >
-          Add Book
+         {isLoading ? (
+              <img
+                className="h-12"
+                src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-22-68_512.gif"
+                alt="Loading"
+              />
+            ) : (
+              <div>Add Book</div>
+            )} 
+          
         </button>
       </div>
     </div>

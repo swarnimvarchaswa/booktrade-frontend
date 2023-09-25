@@ -257,6 +257,7 @@
 //   );
 // }
 
+
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SendIcon from "../Features/Icons/SendIcon";
@@ -274,7 +275,6 @@ export default function ChatBox() {
   const [otherUserId, setOtherUserId] = useState("");
   const [newMessage, setNewMessage] = useState([]);
   const chatContainerRef = useRef(null);
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   useEffect(() => {
     // Initialize Socket.io connection
@@ -394,6 +394,8 @@ export default function ChatBox() {
     setMessages((prevMessages) => [...prevMessages, newMessageObj]);
     setNewMessage("");
 
+    // console.log("Other User ID:", otherUserId);
+
     socket.emit("new message", {
       chat: { _id: chatId, users: [loggedInUserId, otherUserId] },
       sender: { _id: loggedInUserId },
@@ -431,9 +433,7 @@ export default function ChatBox() {
   return (
     <div className="lg:w-4/5 w-full fixed right-0 rounded">
       <div
-        className={`overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar ${
-          isKeyboardOpen ? "max-w-screen-md mx-auto" : ""
-        }`}
+        className="overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar"
         ref={chatContainerRef}
       >
         <style>
@@ -464,9 +464,7 @@ export default function ChatBox() {
               className="w-12 h-12 rounded-full ml-[3vw] mr-2"
             />
             <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
-              <span className="line-clamp-1 overflow-hidden">
-                {otherUserName}
-              </span>
+            <span className="line-clamp-1 overflow-hidden">{otherUserName}</span>
             </h3>
           </Link>
         </div>
@@ -495,11 +493,7 @@ export default function ChatBox() {
           <br />
           <br />
         </div>
-        <div
-          className={`fixed bottom-0 bg-slate-50 py-6 pl-[3vw] pr-[3vw] flex items-center w-full ${
-            isKeyboardOpen ? "max-w-screen-md mx-auto" : ""
-          }`}
-        >
+        <div className="fixed bottom-0 bg-slate-50 py-6 pl-[3vw] pr-[3vw] flex items-center w-full">
           <input
             className="py-3 px-3 w-full lg:w-[74vw] rounded-lg bg-gray-200 outline-none"
             type="text"
@@ -522,3 +516,4 @@ export default function ChatBox() {
     </div>
   );
 }
+

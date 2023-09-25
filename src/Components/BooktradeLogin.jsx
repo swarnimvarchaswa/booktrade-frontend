@@ -1,5 +1,6 @@
 import React, { useState } from "react"; //, useContext
 import { Link, useNavigate } from "react-router-dom";
+
 // import { toast } from "react-toastify";
 // import { LoginContext } from "../context/loginContext";
 
@@ -120,8 +121,8 @@ function Login() {
         <div className="grid justify-stretch mt-10 font-r tracking-wider">
           <button
             className={`${
-              isLoading ? "bg-purple-500" : "bg-purple-600"
-            } text-white py-3 px-4 rounded hover:bg-purple-700 flex items-center justify-center`}
+              isLoading ? "bg-purple-400" : "bg-purple-600"
+            } text-white rounded  flex items-center justify-center`}
             onClick={() => {
               postData();
             }}
@@ -129,16 +130,15 @@ function Login() {
           >
             {isLoading ? (
               <img
-              className="h-5 w-5"
-                src="https://res.cloudinary.com/booktrade/image/upload/v1695467046/loading-50_up1ozs.gif"
+                className="h-12 "
+                src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-22-68_512.gif"
                 alt="Loading"
-              /> // Replace with your loading image path
+              />
             ) : (
-              "Log In"
+              <div className="py-3 w-full rounded hover:bg-purple-700 ">Log In</div>
             )}
           </button>
         </div>
-
         {/* Overall error */}
         {overallError && (
           <p className="text-red-400 px-3 mt-8 font-m tracking-wide text-sm text-center">
