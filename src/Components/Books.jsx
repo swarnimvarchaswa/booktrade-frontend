@@ -45,13 +45,13 @@ function BookList({ data, loggedInUserId }) {
     };
   }, []);
 
-  if (!data) {
-    return (
-      <div className="mt-6 text-m tracking-wide text-gray-600 text-lg ">
-        Loading...
-      </div>
-    );
-  }
+  // if (!data) {
+  //   return (
+  //     <div className="mt-6 text-m tracking-wide text-gray-600 text-lg ">
+  //       Loading...
+  //     </div>
+  //   );
+  // }
 
   if (!Array.isArray(data)) {
     return (

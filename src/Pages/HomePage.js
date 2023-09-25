@@ -10,7 +10,7 @@ export default function HomePage() {
   const [activeTab, setActiveTab] = useState(1);
   const [data, setData] = useState([]);
   const [loggedInUserId, setLoggedInUserId] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -22,6 +22,7 @@ export default function HomePage() {
   const handleTabChange = (tabIndex) => {
     setActiveTab(tabIndex);
     setData([]);
+    setIsLoading(true);
   };
 
   useEffect(() => {
@@ -32,7 +33,10 @@ export default function HomePage() {
         },
       })
         .then((res) => res.json())
-        .then((result) => setData(result))
+        .then((result) => {
+          setData(result);
+          setIsLoading(false);
+        })
         .catch((err) => console.log(err));
     } else if (activeTab === 2) {
       fetch("https://booktrade-api.onrender.com/postsByUserReadingList", {
@@ -41,7 +45,10 @@ export default function HomePage() {
         },
       })
         .then((res) => res.json())
-        .then((result) => setData(result))
+        .then((result) => {
+          setData(result);
+          setIsLoading(false);
+        })
         .catch((err) => console.log(err));
     }
   }, [activeTab]);
@@ -85,10 +92,30 @@ export default function HomePage() {
       )}
 
       {activeTab === 1 && (
-        <BookList data={data} loggedInUserId={loggedInUserId} />
+        <>
+          {isLoading ? (
+            <img
+              className="max-w-md mx-auto"
+              src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+              alt="Loading"
+            />
+          ) : (
+            <BookList data={data} loggedInUserId={loggedInUserId} />
+          )}
+        </>
       )}
       {activeTab === 2 && (
-        <BookList data={data} loggedInUserId={loggedInUserId} />
+        <>
+          {isLoading ? (
+            <img
+              className="max-w-md mx-auto"
+              src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+              alt="Loading"
+            />
+          ) : (
+            <BookList data={data} loggedInUserId={loggedInUserId} />
+          )}
+        </>
       )}
       <div className="max-w-md mx-auto px-2 ">
         <p className="font-r text-lg mt-6 text-slate-400">© 2023 BookTrade</p>
