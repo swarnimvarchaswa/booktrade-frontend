@@ -42,7 +42,7 @@ function HomePage() {
 
   const handleTabChange = (tabIndex) => {
     setActiveTab(tabIndex);
-    localStorage.setItem("activeTab", tabIndex);
+    localStorage.setItem("activeTab", tabIndex); 
     setIsLoading(true)
   };
 
@@ -59,7 +59,7 @@ function HomePage() {
           setIsLoading(false);
         });
     }
-  }, []);
+  }, [activeTab]);
 
   useEffect(() => {
     fetch("https://booktrade-api.onrender.com/loginuser", {
