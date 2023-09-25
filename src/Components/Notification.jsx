@@ -5,7 +5,9 @@ function Notification() {
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [loggedInUserId, setLoggedInUserId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
+  //login user id
   useEffect(() => {
     fetch("https://booktrade-api.onrender.com/loginuser", {
       headers: {
@@ -27,12 +29,15 @@ function Notification() {
   const fetchNotifications = async () => {
     try {
       // Send a GET request to fetch notifications
-      const response = await fetch("https://booktrade-api.onrender.com/notification", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-      });
+      const response = await fetch(
+        "https://booktrade-api.onrender.com/notification",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -42,24 +47,29 @@ function Notification() {
         // Handle the case when the request fails
         console.error("Failed to fetch notifications");
       }
+      setIsLoading(false);
     } catch (err) {
       console.error(err);
+      setIsLoading(false);
     }
   };
 
   const rejectRequest = async (notification) => {
     try {
-      const response = await fetch("https://booktrade-api.onrender.com/notification", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-        body: JSON.stringify({
-          notificationId: notification, // Assuming you have NotificationId in your component's state
-          newStatus: "reject", // Set the new status as needed
-        }),
-      });
+      const response = await fetch(
+        "https://booktrade-api.onrender.com/notification",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify({
+            notificationId: notification, // Assuming you have NotificationId in your component's state
+            newStatus: "reject", // Set the new status as needed
+          }),
+        }
+      );
       if (response.ok) {
         fetchNotifications();
       } else {
@@ -73,18 +83,21 @@ function Notification() {
 
   const acceptBorrowRequest = async (notification) => {
     try {
-      const response = await fetch("https://booktrade-api.onrender.com/notification", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-        body: JSON.stringify({
-          notificationId: notification, // Assuming you have NotificationId in your component's state
-          newStatus: "accept", // Set the new status as needed
-          newRequest: "borrow",
-        }),
-      });
+      const response = await fetch(
+        "https://booktrade-api.onrender.com/notification",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify({
+            notificationId: notification, // Assuming you have NotificationId in your component's state
+            newStatus: "accept", // Set the new status as needed
+            newRequest: "borrow",
+          }),
+        }
+      );
       if (response.ok) {
         fetchNotifications();
       } else {
@@ -98,18 +111,21 @@ function Notification() {
 
   const confirmButton = async (notification) => {
     try {
-      const response = await fetch("https://booktrade-api.onrender.com/exchange", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-        body: JSON.stringify({
-          notificationId: notification, // Assuming you have NotificationId in your component's state
-          newStatus: "exchange", // Set the new status as needed
-          newConfirmId: loggedInUserId,
-        }),
-      });
+      const response = await fetch(
+        "https://booktrade-api.onrender.com/exchange",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify({
+            notificationId: notification, // Assuming you have NotificationId in your component's state
+            newStatus: "exchange", // Set the new status as needed
+            newConfirmId: loggedInUserId,
+          }),
+        }
+      );
       if (response.ok) {
         fetchNotifications();
       } else {
@@ -123,25 +139,25 @@ function Notification() {
 
   const confirmExchange = async (notification) => {
     try {
-      const response = await fetch("https://booktrade-api.onrender.com/exchange", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-        body: JSON.stringify({
-          notificationId: notification, // Assuming you have NotificationId in your component's state
-          newStatus: "confirm", // Set the new status as needed
-        }),
-      });
+      const response = await fetch(
+        "https://booktrade-api.onrender.com/exchange",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify({
+            notificationId: notification, // Assuming you have NotificationId in your component's state
+            newStatus: "confirm", // Set the new status as needed
+          }),
+        }
+      );
       if (response.ok) {
         // fetchNotifications();
-        if (notification.respondBookId){
+        if (notification.respondBookId) {
           exchangeBook(notification);
-        } else (
-          fetchNotifications()
-        )
-        
+        } else fetchNotifications();
       } else {
         // Handle errors, e.g., show an error message
         console.error("Failed to update notification");
@@ -153,16 +169,19 @@ function Notification() {
 
   const exchangeBook = async (notificationId) => {
     try {
-      const response = await fetch("https://booktrade-api.onrender.com/exchangebook", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-        body: JSON.stringify({
-          notificationId: notificationId,
-        }),
-      });
+      const response = await fetch(
+        "https://booktrade-api.onrender.com/exchangebook",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify({
+            notificationId: notificationId,
+          }),
+        }
+      );
       if (response.ok) {
         // fetchNotifications();
         navigate("/profile");
@@ -198,6 +217,21 @@ function Notification() {
   return (
     <div className="container max-w-md mx-auto px-4 py-4">
       <div className="grid grid-cols-1 gap-5 w-full">
+        {/* loader */}
+        {isLoading && (
+          <img
+            className="max-w-md w-full mx-auto"
+            src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+            alt="Loading"
+          />
+        )}
+        {/* if no notification */}
+        {!isLoading && notifications.length === 0 && (
+          <div className="mt-6 text-m tracking-wide text-gray-600 text-lg ">
+            No new notifications
+          </div>
+        )}
+        {/* notifications */}
         {notifications.map((notification) => (
           <div key={notification._id}>
             {/* pending.......................................................................................................................................................... */}
@@ -677,7 +711,7 @@ function Notification() {
                     <p className="mx-4 font-r tracking-wide text-gray-600 leading-relaxed">
                       Book exchange successfully completed.
                     </p>
-                   
+
                     <p className="mx-4 font-r tracking-wide text-gray-600 leading-relaxed">
                       For anything feel free to contact us.
                     </p>
