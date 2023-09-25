@@ -5,7 +5,7 @@ import Tabs from "../Components/Tabs";
 import BookList from "../Components/Books";
 import UserReadingList from "../Components//UserReadingList";
 import BottomNavbar from "../Components/BottomNavbar";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UserProfile() {
   const { userId } = useParams();
