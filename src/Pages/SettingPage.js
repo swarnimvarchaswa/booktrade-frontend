@@ -22,10 +22,10 @@ function SettingPage() {
         <Navbar />
       <Setting />
       <BottomNavbar />
-      <div className="max-w-md mx-auto px-2 pt-8 mt-12">
-        <p className="font-r text-lg mt-6 text-slate-400">© 2023 BookTrade</p>
-        <p className="font-r text-lg mb-4 text-gray-400">
-          Designed & Developed by <Link
+      <div className="max-w-md mx-auto fixed bottom-12 left-0 right-0">
+        <p className="font-r text-sm mt-6 text-slate-400">© 2023 BookTrade</p>
+        <p className="font-r text-sm mb-4 text-gray-400">
+          Designed and Developed by <Link
           to="https://www.linkedin.com/in/swarnim-varchaswa-59a086228/"
           target="_blank"
           className="text-purple-400 font-normal"

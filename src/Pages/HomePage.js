@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../Components/Navbar";
 import BottomNavbar from "../Components/BottomNavbar";
 import Tabs from "../Components/Tabs";
@@ -90,12 +90,11 @@ export default function HomePage() {
           </h1>
         </div>
       )}
-
       {activeTab === 1 && (
         <>
           {isLoading ? (
             <img
-              className="max-w-md mx-auto"
+              className="max-w-md w-full mx-auto"
               src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
               alt="Loading"
             />
@@ -108,7 +107,7 @@ export default function HomePage() {
         <>
           {isLoading ? (
             <img
-              className="max-w-md mx-auto"
+              className="max-w-md w-full mx-auto"
               src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
               alt="Loading"
             />
@@ -117,9 +116,11 @@ export default function HomePage() {
           )}
         </>
       )}
-      <div className="max-w-md mx-auto px-2 ">
-        <p className="font-r text-lg mt-6 text-slate-400">© 2023 BookTrade</p>
-        <p className="font-r text-lg mb-4 text-gray-400">
+      <div
+        className={`max-w-md mx-auto px-2 ${isLoading ? "fixed bottom-12 left-0 right-0" : ""}`}
+      >
+        <p className="font-r text-sm mt-6 text-slate-400">© 2023 BookTrade</p>
+        <p className="font-r text-sm mb-4 text-gray-400">
           Designed & Developed by{" "}
           <Link
             to="https://www.linkedin.com/in/swarnim-varchaswa-59a086228/"
