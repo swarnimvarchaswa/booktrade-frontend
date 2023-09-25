@@ -88,21 +88,21 @@ function Profile({ user }) {
   const getYearText = (year) => {
     switch (year) {
       case "1":
-        return "First Year";
+        return ", First Year";
       case "2":
-        return "Second Year";
+        return ", Second Year";
       case "3":
-        return "Third Year";
+        return ", Third Year";
       case "4":
-        return "Fourth Year";
+        return ", Fourth Year";
       case "5":
-        return "Fifth Year";
+        return ", Fifth Year";
       case "6":
-        return "Sixth Year";
+        return ", Sixth Year";
       case "7":
-        return "Seventh Year";
+        return ", Seventh Year";
       default:
-        return "Loading...";
+        return "Loading";
     }
   };
 
@@ -134,7 +134,7 @@ function Profile({ user }) {
               onClick={handleProfilePicChange}
               className="h-[150px] w-[150px] rounded-full border-solid border-2 border-purple-500"
               src={user.profilePic}
-              alt="Profile Img"
+              alt=""
             />
           </div>
           <div className="my-6 font-r tracking-wide text-3xl text-gray-800">
@@ -142,7 +142,7 @@ function Profile({ user }) {
           </div>
           <div className="font-r tracking-wide text-lg text-gray-500">
             <p>
-              {user.collegeDegree}, {getYearText(user.year)}
+              {user.collegeDegree}{getYearText(user.year)}
             </p>
           </div>
           <div

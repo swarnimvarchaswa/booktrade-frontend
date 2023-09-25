@@ -21,6 +21,9 @@ function MessagePage() {
         <Navbar />
         <Message />
         <BottomNavbar />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
   );
