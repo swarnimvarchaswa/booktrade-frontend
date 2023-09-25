@@ -15,6 +15,7 @@ export default function UserProfile() {
   const [readingList, setReadingList] = useState([]);
   const [userData, setUserData] = useState("");
   const [activeTab, setActiveTab] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -59,10 +60,12 @@ export default function UserProfile() {
         setReadingList(readingList);
         setPosts(posts);
         setUserData(user);
+        setIsLoading(false)
         // Now you can use user, posts, and readingList data in your frontend code
       })
       .catch((err) => {
         console.error("Error fetching user data:", err);
+        setIsLoading(false)
       });
   }, [userId]);
 
@@ -104,7 +107,32 @@ export default function UserProfile() {
         onTabChange={handleTabChange} // Pass a callback function to handle tab changes
       />
       {activeTab === 1 && (
-        <BookList data={posts} loggedInUserId={loggedInUserId} />
+         <>
+         {isLoading ? (
+           <div className="max-w-md mx-auto">
+           <img
+             className="w-1/2 mx-auto"
+             src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+             alt="Loading"
+           />
+           </div>
+         ) : (
+          <>
+          {isLoading ? (
+            <div className="max-w-md mx-auto">
+            <img
+              className=" w-1/2 mx-auto"
+              src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+              alt="Loading"
+            /></div>
+          ) : (
+            <BookList data={posts} loggedInUserId={loggedInUserId} />
+          )}
+        </>
+          
+         )}
+       </>
+        
       )}
       {activeTab === 2 && <UserReadingList readinglist={readingList} />}
       <BottomNavbar />

@@ -19,6 +19,7 @@ function HomePage() {
   );
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://booktrade-api.onrender.com/userdetail", {
@@ -42,6 +43,7 @@ function HomePage() {
   const handleTabChange = (tabIndex) => {
     setActiveTab(tabIndex);
     localStorage.setItem("activeTab", tabIndex);
+    setIsLoading(true)
   };
 
   useEffect(() => {
@@ -54,6 +56,7 @@ function HomePage() {
         .then((res) => res.json())
         .then((result) => {
           setPic(result);
+          setIsLoading(false);
         });
     }
   }, []);
@@ -83,6 +86,7 @@ function HomePage() {
         .then((res) => res.json())
         .then((result) => {
           setReadingList(result);
+          setIsLoading(false)
         });
     }
   }, [activeTab]);
@@ -150,13 +154,36 @@ function HomePage() {
         </div>
       )}
       {activeTab === 1 && (
-        <BookList data={pic} loggedInUserId={loggedInUserId} />
+        <>
+          {isLoading ? (
+            <div className="max-w-md mx-auto">
+            <img
+              className="w-1/2 mx-auto"
+              src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+              alt="Loading"
+            />
+            </div>
+          ) : (
+            <BookList data={pic} loggedInUserId={loggedInUserId} />
+          )}
+        </>
       )}
       {activeTab === 2 && (
-        <Readinglist
-          readinglist={readingList}
-          onDeleteItem={handleDeleteReadingListItem}
-        />
+        <>
+          {isLoading ? (
+            <div className="max-w-md mx-auto">
+            <img
+              className=" w-1/2 mx-auto"
+              src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+              alt="Loading"
+            /></div>
+          ) : (
+            <Readinglist
+              readinglist={readingList}
+              onDeleteItem={handleDeleteReadingListItem}
+            />
+          )}
+        </>
       )}
       <BottomNavbar />
       <DeleteBookModal
@@ -164,7 +191,6 @@ function HomePage() {
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
       />
-     
 
       <br />
       <br />
