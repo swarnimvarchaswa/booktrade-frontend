@@ -92,15 +92,17 @@ function HomePage() {
   }, [activeTab]);
 
   const handleDeleteReadingListItem = (indexToDelete) => {
+    console.log("Selected item index:", indexToDelete);
     // Set the item to delete and open the delete confirmation modal
     setItemToDelete(indexToDelete);
     setIsDeleteModalOpen(true);
   };
 
   const confirmDelete = () => {
+    console.log("Reading list before delete:", readingList.readingList);
     // Make a DELETE request to your server to delete the item
     fetch(
-      `https://booktrade-api.onrender.com/readinglist/${readingList.readingList[itemToDelete]._id}`,
+      `https://booktrade-api.onrender.com/readinglist/${[itemToDelete]}`,
       {
         method: "DELETE",
         headers: {
@@ -111,10 +113,13 @@ function HomePage() {
       .then((res) => res.json())
       .then((result) => {
         if (!result.error) {
+          console.log("Deleted item:", readingList.readingList[itemToDelete]);
           // Update the state with the modified reading list
           const updatedReadingList = [...readingList.readingList];
           updatedReadingList.splice(itemToDelete, 1);
           setReadingList({ readingList: updatedReadingList });
+
+          console.log("Reading list after delete:", updatedReadingList);
         } else {
           console.error(result.error);
         }

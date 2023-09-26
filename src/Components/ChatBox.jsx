@@ -173,7 +173,7 @@
 //   return (
 //     <div className="lg:w-4/5 w-full fixed right-0 rounded">
 //       <div
-//         className="overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar"
+//         className="overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar mt-auto"
 //         ref={chatContainerRef}
 //       >
 //         <style>
@@ -213,7 +213,7 @@
 //           <br />
 //           <br />
 //           <br />
-//           <p className="font-r text-sm lg:text-base font-normal text-gray-300">
+//           <p className="font-r text-sm lg:text-base font-normal text-gray-300 mt-auto">
 //             Messages will disappear on their own in 24 hr.
 //           </p>
 //           <br />
@@ -272,7 +272,7 @@ export default function ChatBox() {
   const [otherUserName, setOtherUserName] = useState("");
   const [otherUserProfilePic, setOtherUserProfilePic] = useState("");
   const [otherUserId, setOtherUserId] = useState("");
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState([]);
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
@@ -360,7 +360,7 @@ export default function ChatBox() {
         }
 
         const data = await response.json();
-        setMessages(data.messages.reverse()); // Reverse the order of messages
+        setMessages(data.messages);
 
         socket.emit("join chat", chatId);
       } catch (error) {
@@ -369,12 +369,13 @@ export default function ChatBox() {
     };
 
     fetchData();
-  }, [chatId]);
+  }, []);
 
   // Scroll to the bottom when new messages arrive
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -430,25 +431,23 @@ export default function ChatBox() {
 
   return (
     <div className="lg:w-4/5 w-full fixed right-0 rounded">
-       <div className="fixed w-full">
-          <Link
-            to={`/user/${otherUserId}`}
-            className="flex items-center bg-white"
-          >
-            <img
-              src={otherUserProfilePic}
-              alt="User's Image"
-              className="w-12 h-12 rounded-full ml-[3vw] mr-2"
-            />
-            <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
-            <span className="line-clamp-1 overflow-hidden">{otherUserName}</span>
-            </h3>
-          </Link>
-        </div>
+      <div className="fixed lg:top-16 top-0 w-full bg-white">
+        <Link to={`/user/${otherUserId}`} className="flex items-center">
+          <img
+            src={otherUserProfilePic}
+            alt="User's Image"
+            className="w-12 h-12 rounded-full ml-[3vw] mr-2"
+          />
+          <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 text-purple-700">
+            <span className="line-clamp-1 overflow-hidden">
+              {otherUserName}
+            </span>
+          </h3>
+        </Link>
+      </div>
       <div
-        className="overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar"
+        className="overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar mt-auto flex flex-col-reverse"
         ref={chatContainerRef}
-        style={{ display: 'flex', flexDirection: 'column-reverse' }}
       >
         <style>
           {`
@@ -467,7 +466,7 @@ export default function ChatBox() {
           }
         `}
         </style>
-       
+
         <div className="pl-[3vw] pr-[3vw]">
           <br />
           <br />
@@ -490,10 +489,11 @@ export default function ChatBox() {
               {message.content}
             </p>
           ))}
+         
           <br />
           <br />
         </div>
-        <div className="fixed bottom-0 bg-slate-50 py-6 pl-[3vw] pr-[3vw] flex items-center w-full">
+        <div className="fixed bottom-0 bg-slate-50 pb-8 pt-2 pl-[3vw] pr-[3vw] flex items-center w-full">
           <input
             className="py-3 px-3 w-full lg:w-[74vw] rounded-lg bg-gray-200 outline-none"
             type="text"
@@ -516,4 +516,3 @@ export default function ChatBox() {
     </div>
   );
 }
-
