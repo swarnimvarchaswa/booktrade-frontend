@@ -108,8 +108,8 @@ function SearchPage() {
       {!searchQuery ? (
         <div className="mt-6 text-m tracking-wide text-gray-600 text-lg">
           {activeTab === 1
-            ? "Please enter book name"
-            : "Please enter user name"}
+            ? "Enter Book Name"
+            : "Enter User Name"}
         </div>
       ) : activeTab === 1 ? (
         <>

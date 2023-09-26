@@ -208,7 +208,7 @@ export default function ChatBox() {
           }
         `}
         </style>
-        
+
         <div className="pl-[3vw] pr-[3vw]">
           <br />
           <br />
@@ -257,5 +257,4 @@ export default function ChatBox() {
     </div>
   );
 }
-
 
