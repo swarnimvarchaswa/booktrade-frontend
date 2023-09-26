@@ -35,6 +35,11 @@ function People() {
         />
       ) : (
         <>
+          {chats.length === 0 && (
+            <div className="mt-6 text-m tracking-wide text-gray-600 text-lg ">
+              No New Messages
+            </div>
+          )}
           {Array.isArray(chats) &&
             chats.map((chat) => (
               <div key={chat._id}>
@@ -72,3 +77,6 @@ function People() {
 }
 
 export default People;
+
+
+

@@ -257,7 +257,6 @@
 //   );
 // }
 
-
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SendIcon from "../Features/Icons/SendIcon";
@@ -273,7 +272,7 @@ export default function ChatBox() {
   const [otherUserName, setOtherUserName] = useState("");
   const [otherUserProfilePic, setOtherUserProfilePic] = useState("");
   const [otherUserId, setOtherUserId] = useState("");
-  const [newMessage, setNewMessage] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
@@ -361,7 +360,7 @@ export default function ChatBox() {
         }
 
         const data = await response.json();
-        setMessages(data.messages);
+        setMessages(data.messages.reverse()); // Reverse the order of messages
 
         socket.emit("join chat", chatId);
       } catch (error) {
@@ -370,13 +369,12 @@ export default function ChatBox() {
     };
 
     fetchData();
-  }, []);
+  }, [chatId]);
 
   // Scroll to the bottom when new messages arrive
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -415,7 +413,7 @@ export default function ChatBox() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw Error("Network response was not ok");
         }
         return response.json();
       })
@@ -432,9 +430,25 @@ export default function ChatBox() {
 
   return (
     <div className="lg:w-4/5 w-full fixed right-0 rounded">
+       <div className="fixed w-full">
+          <Link
+            to={`/user/${otherUserId}`}
+            className="flex items-center bg-white"
+          >
+            <img
+              src={otherUserProfilePic}
+              alt="User's Image"
+              className="w-12 h-12 rounded-full ml-[3vw] mr-2"
+            />
+            <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
+            <span className="line-clamp-1 overflow-hidden">{otherUserName}</span>
+            </h3>
+          </Link>
+        </div>
       <div
         className="overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar"
         ref={chatContainerRef}
+        style={{ display: 'flex', flexDirection: 'column-reverse' }}
       >
         <style>
           {`
@@ -453,21 +467,7 @@ export default function ChatBox() {
           }
         `}
         </style>
-        <div className="fixed w-full">
-          <Link
-            to={`/user/${otherUserId}`}
-            className="flex items-center bg-white"
-          >
-            <img
-              src={otherUserProfilePic}
-              alt="User's Image"
-              className="w-12 h-12 rounded-full ml-[3vw] mr-2"
-            />
-            <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
-            <span className="line-clamp-1 overflow-hidden">{otherUserName}</span>
-            </h3>
-          </Link>
-        </div>
+       
         <div className="pl-[3vw] pr-[3vw]">
           <br />
           <br />

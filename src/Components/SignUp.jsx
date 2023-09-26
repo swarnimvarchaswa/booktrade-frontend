@@ -273,8 +273,8 @@ function SignUp() {
       <div className="grid justify-stretch mt-10 font-r tracking-wider">
         <button
           className={`${
-            isLoading ? "bg-purple-400" : "bg-purple-600 hover:bg-purple-700 py-3"
-          } text-white rounded  flex items-center justify-center`}
+            isLoading ? "bg-purple-400 py-[1px]" : "bg-purple-600 hover:bg-purple-700 py-3"
+          } text-white rounded flex items-center justify-center`}
           onClick={() => {
             postData();
           }}
@@ -282,12 +282,12 @@ function SignUp() {
         >
           {isLoading ? (
             <img
-              className="h-12 "
+              className="h-10 "
               src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-22-68_512.gif"
               alt="Loading"
             /> // Replace with your loading image path
           ) : (
-            "Sign Up"
+            <div>Sign Up</div>
           )}
         </button>
       </div>
