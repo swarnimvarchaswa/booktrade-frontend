@@ -48,7 +48,7 @@ function Notification() {
       if (response.ok) {
         const data = await response.json();
         setNotifications(data.notifications);
-        console.log("Request data:", data);
+        // console.log("Request data:", data);
       } else {
         // Handle the case when the request fails
         console.error("Failed to fetch notifications");
