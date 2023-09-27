@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment"; // Import moment.js
+
+function formatTimestamp(timestamp) {
+  // return moment(timestamp).format("h:mm A");
+  return moment(timestamp).format("MMMM Do, YYYY h:mm A");
+}
 
 function Notification() {
   const navigate = useNavigate();
@@ -42,7 +48,7 @@ function Notification() {
       if (response.ok) {
         const data = await response.json();
         setNotifications(data.notifications);
-        // console.log("Request data:", data);
+        console.log("Request data:", data);
       } else {
         // Handle the case when the request fails
         console.error("Failed to fetch notifications");
@@ -730,6 +736,11 @@ function Notification() {
                   </div>
                 </div>
               )}
+            <p
+              className={`text-[10px] text-right pt-1 lg:text-xs font-r tracking-wide text-gray-500 `}
+            >
+              {formatTimestamp(notification.createdAt)} {/* Format timestamp */}
+            </p>
           </div>
         ))}
       </div>

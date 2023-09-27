@@ -9,9 +9,9 @@ var socket;
 
 function formatTimestamp(timestamp) {
   if (!timestamp) {
-    return moment().format("h:mm A");
+    return moment().format("h:mm a");
   }
-  return moment(timestamp).format("h:mm A");
+  return moment(timestamp).format("h:mm a");
 }
 
 export default function ChatBox() {
