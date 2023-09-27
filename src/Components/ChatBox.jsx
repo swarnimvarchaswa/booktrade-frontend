@@ -252,7 +252,7 @@ export default function ChatBox() {
                 <p
                   className={`text-xs font-r tracking-wide text-right relative z-0 bottom-2 right-2 ${
                     message.sender._id === loggedInUserId
-                      ? "text-white opacity-70"
+                      ? "text-gray-200"
                       : "text-gray-400"
                   }`}
                 >
