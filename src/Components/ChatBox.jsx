@@ -238,15 +238,14 @@ export default function ChatBox() {
                   ? "ml-auto bg-purple-600 text-white"
                   : "mr-auto bg-gray-200 text-gray-800"
               }`}
-            >
-              
+            >              
                 <p
-                  className={`font-r text-left text-lg pt-2 pl-3 pb-4 pr-[70px] rounded-2xl text-ellipsis overflow-hidden lg:max-w-[60vw] max-w-[75vw]`}
+                  className={`font-r text-left text-lg pt-2 pl-3 pb-3 pr-[70px] rounded-2xl text-ellipsis overflow-hidden lg:max-w-[60vw] max-w-[75vw]`}
                 >
                   {message.content}
                 </p>
                 <span
-                  className={`text-xs font-r tracking-wide absolute z-0 bottom-2  right-2 ${
+                  className={`text-xs font-r tracking-wide absolute z-0 bottom-2 right-2 ${
                     message.sender._id === loggedInUserId
                       ? "text-gray-200"
                       : "text-gray-400"
