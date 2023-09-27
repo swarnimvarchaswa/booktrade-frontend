@@ -1,10 +1,18 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SendIcon from "../Features/Icons/SendIcon";
+import moment from "moment"; // Import moment.js
 
 import io from "socket.io-client";
 const ENDPOINT = "https://booktrade-api.onrender.com";
 var socket;
+
+function formatTimestamp(timestamp) {
+  if (!timestamp) {
+    return moment().format("h:mm A");
+  }
+  return moment(timestamp).format("h:mm A");
+}
 
 export default function ChatBox() {
   const { chatId } = useParams();
@@ -102,6 +110,7 @@ export default function ChatBox() {
 
         const data = await response.json();
         setMessages(data.messages);
+        // console.log(data.messages)
 
         socket.emit("join chat", chatId);
       } catch (error) {
@@ -172,21 +181,23 @@ export default function ChatBox() {
 
   return (
     <div className="lg:w-4/5 w-full fixed right-0 rounded">
-      <div className="fixed w-full">
-          <Link
-            to={`/user/${otherUserId}`}
-            className="flex items-center bg-white"
-          >
-            <img
-              src={otherUserProfilePic}
-              alt="User's Image"
-              className="w-12 h-12 rounded-full ml-[3vw] mr-2"
-            />
-            <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
-            <span className="line-clamp-1 overflow-hidden">{otherUserName}</span>
-            </h3>
-          </Link>
-        </div>
+      <div className="fixed w-full z-10">
+        <Link
+          to={`/user/${otherUserId}`}
+          className="flex items-center bg-white"
+        >
+          <img
+            src={otherUserProfilePic}
+            alt="User's Image"
+            className="w-12 h-12 rounded-full ml-[3vw] mr-2"
+          />
+          <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
+            <span className="line-clamp-1 overflow-hidden">
+              {otherUserName}
+            </span>
+          </h3>
+        </Link>
+      </div>
       <div
         className="overflow-y-auto pb-10 bg-slate-50 h-[94vh] lg:h-[86vh] custom-scrollbar mt-auto flex flex-col-reverse"
         ref={chatContainerRef}
@@ -220,23 +231,43 @@ export default function ChatBox() {
           <br />
 
           {messages.map((message, index) => (
-            <p
+            <div
               key={`${message._id || message.chat._id}-${index}`}
-              className={`font-r text-left text-lg py-2 px-6 my-2 rounded-2xl w-fit ${
+              className={`font-r text-left text-lg my-2 rounded-2xl w-fit ${
                 message.sender._id === loggedInUserId
                   ? "ml-auto bg-purple-600 text-white"
                   : "mr-auto bg-gray-200 text-gray-800"
               }`}
             >
-              {message.content}
-            </p>
+              
+                <p
+                  className={`font-r text-left text-lg pt-2 pl-3 pr-[70px] rounded-2xl text-ellipsis overflow-hidden lg:max-w-[60vw] max-w-[75vw] ${
+                    message.sender._id === loggedInUserId
+                      ? "ml-auto bg-purple-600 text-white"
+                      : "mr-auto bg-gray-200 text-gray-800"
+                  }`}
+                >
+                  {message.content}
+                </p>
+                <p
+                  className={`text-xs font-r tracking-wide text-right relative z-0 bottom-2 right-2 ${
+                    message.sender._id === loggedInUserId
+                      ? "text-white opacity-70"
+                      : "text-gray-400"
+                  }`}
+                >
+                  {formatTimestamp(message.createdAt)} {/* Format timestamp */}
+                </p>
+              </div>
+            
           ))}
+
           <br />
           <br />
         </div>
         <div className="fixed bottom-0 bg-slate-50 pb-6 pt-2 pl-[3vw] pr-[3vw] flex items-center w-full">
           <input
-            className="py-3 px-3 w-full lg:w-[74vw] rounded-lg bg-gray-200 outline-none"
+            className="py-3 pl-3 pr-14 w-full lg:w-[74vw] rounded-lg bg-gray-200 outline-none"
             type="text"
             id="newMessage"
             name="newMessage"
@@ -257,4 +288,3 @@ export default function ChatBox() {
     </div>
   );
 }
-
