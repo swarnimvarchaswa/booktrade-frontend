@@ -240,12 +240,12 @@ export default function ChatBox() {
               }`}
             >              
                 <p
-                  className={`font-r text-left text-base lg:text-lg pt-2 pl-3 pb-3 pr-[73px] rounded-2xl text-ellipsis overflow-hidden lg:max-w-[60vw] max-w-[75vw]`}
+                  className={`font-r text-left text-base lg:text-lg pt-2 pl-3 pb-3 pr-[65px] lg:pr-[73px] rounded-2xl text-ellipsis overflow-hidden lg:max-w-[60vw] max-w-[75vw]`}
                 >
                   {message.content}
                 </p>
                 <span
-                  className={`text-xs font-r tracking-wide absolute z-0 bottom-1 right-2 ${
+                  className={`text-[10px] lg:text-xs font-r tracking-wide absolute z-0 lg:bottom-1 bottom-0 right-2 ${
                     message.sender._id === loggedInUserId
                       ? "text-gray-300"
                       : "text-gray-400"
