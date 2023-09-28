@@ -223,10 +223,9 @@ function Notification() {
           }),
         }
       );
-      if (response.ok) {
-          handleNotificationClick();
+      if (response.ok) {   
           fetchNotifications();
-
+          handleNotificationClick();
       } else {
         // Handle errors, e.g., show an error message
         console.error("Failed to update notification");
@@ -754,7 +753,7 @@ function Notification() {
                       className="font-r tracking-wider border-solid border-2 rounded-lg py-2 bg-white text-gray-600 hover:bg-purple-500 hover:border-purple-500 hover:text-white text-lg "
                       onClick={() => confirmExchangeborrow(notification._id)}
                     >
-                      Confirm Book exchange
+                      Confirm Book borrow
                     </button>}
                     
                   </div>
