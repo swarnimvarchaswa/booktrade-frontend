@@ -78,6 +78,7 @@ function Notification() {
       );
       if (response.ok) {
         fetchNotifications();
+        handleNotificationClick();
       } else {
         // Handle errors, e.g., show an error message
         console.error("Failed to update notification");
@@ -106,6 +107,7 @@ function Notification() {
       );
       if (response.ok) {
         fetchNotifications();
+        handleNotificationClick();
       } else {
         // Handle errors, e.g., show an error message
         console.error("Failed to update notification");
@@ -134,6 +136,7 @@ function Notification() {
       );
       if (response.ok) {
         fetchNotifications();
+        handleNotificationClick();
       } else {
         // Handle errors, e.g., show an error message
         console.error("Failed to update notification");
@@ -161,9 +164,13 @@ function Notification() {
       );
       if (response.ok) {
         // fetchNotifications();
-        if (notification.respondBookId) {
+        // if (notification.respondBookId) {
           exchangeBook(notification);
-        } else fetchNotifications();
+          handleNotificationClick();
+        // } else {
+        //   fetchNotifications();
+        //   handleNotificationClick();
+        // }
       } else {
         // Handle errors, e.g., show an error message
         console.error("Failed to update notification");
@@ -217,6 +224,26 @@ function Notification() {
       })
       .catch((error) => {
         console.error("Error creating/retrieving chat:", error);
+      });
+  }
+
+  function handleNotificationClick() {
+    // Add logic to handle the notification click
+    // For example, you can make a fetch request to your server to update the notificationCheck field
+    fetch("https://booktrade-api.onrender.com/updateNotificationCheck", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.message);
+        // Set the notificationClicked state to true to indicate that the notification was clicked
+      })
+      .catch((error) => {
+        console.error(error); // Handle any errors
       });
   }
 

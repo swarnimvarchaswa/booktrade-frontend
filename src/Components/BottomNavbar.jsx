@@ -29,7 +29,7 @@ function BottomNavBar() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.message);
+        // console.log(data.message);
         // Set the notificationClicked state to true to indicate that the notification was clicked
       })
       .catch((error) => {
