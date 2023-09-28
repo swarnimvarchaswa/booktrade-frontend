@@ -53,9 +53,9 @@ function BookDetails({ selectedBook, loggedInUserId, onDelete }) {
     pink: "bg-pink-100 border-pink-300",
   };
 
-  if (!selectedBook) {
-    return <div>Loading...</div>;
-  }
+  // if (!selectedBook) {
+  //   return <div>Loading...</div>;
+  // }
 
   // Check if the user is the owner of the post
   const isOwner = selectedBook.postedBy._id === loggedInUserId;

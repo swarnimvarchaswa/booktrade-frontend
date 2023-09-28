@@ -12,6 +12,7 @@ function BookDetailsPage() {
   const [loggedInUserId, setLoggedInUserId] = useState(null);
   const [isBookDeleted, setIsBookDeleted] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -23,9 +24,11 @@ function BookDetailsPage() {
       .then((res) => res.json())
       .then((result) => {
         setSelectedBook(result);
+        setIsLoading(false);
         // console.log("Fetched book details:", result);
       })
       .catch((err) => console.log(err));
+    // setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -77,19 +80,28 @@ function BookDetailsPage() {
   return (
     <div className="lg:mt-16 lg:py-1">
       <Navbar />
-      
+
       <BottomNavBar />
-      <BookDetails
-        selectedBook={selectedBook}
-        loggedInUserId={loggedInUserId}
-        onDelete={handleDeleteItem}
-      />
+      {isLoading ? (
+        <img
+          className="max-w-md w-full mx-auto"
+          src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+          alt="Loading"
+        />
+      ) : (
+        <>
+          <BookDetails
+            selectedBook={selectedBook}
+            loggedInUserId={loggedInUserId}
+            onDelete={handleDeleteItem}
+          />
+        </>
+      )}
       <DeleteBookModal
         isOpen={isDeleteModalOpen}
         onCancel={() => setIsDeleteModalOpen(false)}
         onDeleteCallback={handleDeleteBook}
       />
-
       <br />
       <br />
       <br />
