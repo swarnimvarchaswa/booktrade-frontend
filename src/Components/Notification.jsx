@@ -207,6 +207,33 @@ function Notification() {
     }
   };
 
+  const confirmExchangeborrow = async (notification) => {
+    try {
+      const response = await fetch(
+        "https://booktrade-api.onrender.com/exchange",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify({
+            notificationId: notification, // Assuming you have NotificationId in your component's state
+            newStatus: "confirm", // Set the new status as needed
+          }),
+        }
+      );
+      if (response.ok) {
+          handleNotificationClick();
+      } else {
+        // Handle errors, e.g., show an error message
+        console.error("Failed to update notification");
+      }
+    } catch (error) {
+      console.error("Error updating notification:", error);
+    }
+  };
+
   function handleSendMessage(userId) {
     // Make a fetch request to create or retrieve a chat
     fetch("https://booktrade-api.onrender.com/chat", {
@@ -715,12 +742,19 @@ function Notification() {
                     </p>
                   </div>
                   <div className="grid justify-items-stretch max-w-md mx-auto px-4 my-8">
-                    <button
+                    { notification.request === "exchange" && <button
                       className="font-r tracking-wider border-solid border-2 rounded-lg py-2 bg-white text-gray-600 hover:bg-purple-500 hover:border-purple-500 hover:text-white text-lg "
                       onClick={() => confirmExchange(notification._id)}
                     >
                       Confirm Book exchange
-                    </button>
+                    </button>}
+                    { notification.request === "borrow" && <button
+                      className="font-r tracking-wider border-solid border-2 rounded-lg py-2 bg-white text-gray-600 hover:bg-purple-500 hover:border-purple-500 hover:text-white text-lg "
+                      onClick={() => confirmExchangeborrow(notification._id)}
+                    >
+                      Confirm Book exchange
+                    </button>}
+                    
                   </div>
                   <div className="relative mt-4 pb-4 mx-4">
                     <hr className="box-border border-solid border-[2px] rounded-full border-white w-full justify-center absolute " />
