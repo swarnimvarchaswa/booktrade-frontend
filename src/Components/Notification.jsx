@@ -225,6 +225,8 @@ function Notification() {
       );
       if (response.ok) {
           handleNotificationClick();
+          fetchNotifications();
+
       } else {
         // Handle errors, e.g., show an error message
         console.error("Failed to update notification");
