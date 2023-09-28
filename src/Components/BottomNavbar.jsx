@@ -16,7 +16,7 @@ function BottomNavBar() {
   function handleNotificationClick() {
     // Add logic to handle the notification click
     // For example, you can make a fetch request to your server to update the notificationCheck field
-    fetch("http://localhost:5000/updateNotificationCheck", {
+    fetch("https://booktrade-api.onrender.com/updateNotificationCheck", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function BottomNavBar() {
       // Use an async function to fetch the notificationCheck value
       const fetchNotificationCheck = async () => {
         const response = await fetch(
-          "http://localhost:5000/getNotificationCheck", // Assuming this is the correct route
+          "https://booktrade-api.onrender.com/getNotificationCheck", // Assuming this is the correct route
           {
             method: "GET",
             headers: {
