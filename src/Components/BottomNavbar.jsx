@@ -13,6 +13,10 @@ function BottomNavBar() {
   const location = useLocation();
   const [showNotificationHR, setShowNotificationHR] = useState(false); // Control the visibility of <hr> tag
 
+  if (location.pathname === "/notification") {
+    handleNotificationClick()
+  }
+
   function handleNotificationClick() {
     // Add logic to handle the notification click
     // For example, you can make a fetch request to your server to update the notificationCheck field
@@ -32,84 +36,6 @@ function BottomNavBar() {
         console.error(error); // Handle any errors
       });
   }
-
-  // useEffect(() => {
-  //   // Wrap the fetch request in a try-catch block
-  //   try {
-  //     // Use an async function to fetch the notificationCheck value
-  //     const fetchNotificationCheck = async () => {
-  //       const response = await fetch(
-  //         "http://localhost:5000/getNotificationCheck", // Assuming this is the correct route
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: "Bearer " + localStorage.getItem("jwt"),
-  //             // You may need to set other headers if required by your server
-  //           },
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         // Parse the response JSON
-  //         const data = await response.json();
-
-  //         // Extract the notificationCheck value from the response
-  //         const { notificationCheck } = data;
-  //         setCheckTime(data);
-
-  //         // Use the notificationCheck value as needed
-  //         // console.log("Notification Check:", notificationCheck);
-  //       } else {
-  //         // Handle the case when the request fails
-  //         console.error("Failed to fetch notificationCheck");
-  //       }
-  //     };
-
-  //     // Call the async fetchNotificationCheck function
-  //     fetchNotificationCheck();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   // Wrap the fetch request in a try-catch block
-  //   try {
-  //     // Use an async function to fetch data and set state
-  //     const fetchData = async () => {
-  //       const response = await fetch(
-  //         "https://booktrade-api.onrender.com/notification",
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: "Bearer " + localStorage.getItem("jwt"),
-  //           },
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         // Parse the response JSON
-  //         const data = await response.json();
-
-  //         // Extract updatedAt values from the notifications array
-  //         const updatedAtValues = data.notifications.map(
-  //           (notification) => notification.updatedAt
-  //         );
-
-  //         setNotifications(updatedAtValues);
-  //         console.log("Request data:", updatedAtValues);
-  //       } else {
-  //         // Handle the case when the request fails
-  //         console.error("Failed to fetch notifications");
-  //       }
-  //     };
-
-  //     // Call the async fetchData function
-  //     fetchData();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }, []);
 
   useEffect(() => {
     // Wrap the fetch request in a try-catch block
