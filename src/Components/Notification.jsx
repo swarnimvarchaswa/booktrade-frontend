@@ -739,7 +739,7 @@ function Notification() {
             <p
               className={`text-[10px] text-right pt-1 lg:text-xs font-r tracking-wide text-gray-500 `}
             >
-              {formatTimestamp(notification.createdAt)} {/* Format timestamp */}
+              {formatTimestamp(notification.updatedAt)} {/* Format timestamp */}
             </p>
           </div>
         ))}
