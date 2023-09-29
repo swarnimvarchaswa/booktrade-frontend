@@ -117,7 +117,7 @@ export default function HomePage() {
         </>
       )}
       <div
-        className={`max-w-md mx-auto px-2 ${isLoading ? "fixed bottom-12 left-0 right-0" : ""}`}
+        className={`max-w-md mx-auto px-2 ${isLoading ? "fixed bottom-14 left-0 right-0" : ""}`}
       >
         <p className="font-r text-sm mt-6 text-slate-400">© 2023 BookTrade</p>
         <p className="font-r text-sm mb-4 text-gray-400">
