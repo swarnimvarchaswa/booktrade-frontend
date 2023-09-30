@@ -45,16 +45,15 @@ function People() {
               <div key={chat._id}>
                 <div className="flex flex-row border-0 rounded-lg py-1 my-2 hover:bg-purple-100 focus:bg-purple-100">
                   <div className="basis-3/10 flex justify-center relative z-0 whitespace-nowrap flex-shrink-0">
-                    <Link
-                      className=" mx-2 my-1"
-                      to={`/message/${chat._id}`}
-                    >
+                    <Link className=" mx-2 my-1" to={`/message/${chat._id}`}>
                       <img
                         className="h-[50px] w-[50px] rounded-full"
                         src={chat.users[0].profilePic} // Use the profile pic of the first user
                         alt={chat.users[0].name} // Use the name of the first user
                       />
-                      {/* <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[4px] right-[8px] border-solid border-2 border-white"></div> */}
+                      {chat.users[0].isOnline && (
+                        <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[4px] right-[8px] border-solid border-2 border-white"></div>
+                      )}{" "}
                     </Link>
                   </div>
                   <div className="basis-5/10 content place-self-center pr-2">
@@ -71,10 +70,10 @@ function People() {
                     </div>
                   </div>
                   {/* <div className="basis-1/10 content place-self-center pr-2 mr-0 ml-auto mt-0">
-                  <div className="grid grid-row">
+                    <div className="grid grid-row">
                       <Link to={`/message/${chat._id}`}>
                         <div className="text-[11px]  bg-green-500 w-5 h-5 rounded-full flex items-center text-white mb-[8px] mt-[4px]">
-                        <p className="font-r m-auto">11</p>   
+                          <p className="font-r m-auto">11</p>
                         </div>
                         <p className="font-r tracking-wide font-normal text-xs line-clamp-1 text-green-400">
                           4:57
