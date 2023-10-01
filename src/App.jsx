@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect, useRef } from "react"; // { createContext, , useState }
+import React, { useState } from "react"; // { createContext, , useState }
 import HomePage from "./Pages/HomePage";
 import MessagePage from "./Pages/MessagePage";
 import SearchPage from "./Pages/SearchPage";
@@ -22,6 +22,7 @@ import UpdateProfilePic from "./Components/UpdateProfilePic";
 import DeleteProfilePic from "./Components/DeleteProfilePic";
 import ChooseBook from "./Pages/ChooseBook";
 import ChatPage from "./Pages/ChatPage";
+import IsOnline from "./context/socketContext";
 
 import {
   createBrowserRouter,
@@ -31,11 +32,6 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// import io from "socket.io-client";
-// // const ENDPOINT = "https://booktrade-api.onrender.com";
-// const ENDPOINT = "http://localhost:5000";
-// var socket;
 
 function App() {
   const [userLogin, setUserLogin] = useState(false);
@@ -219,6 +215,7 @@ function App() {
           value={{ setUserLogin, setModalOpen }}
           login={userLogin}
         >
+          <IsOnline />
           <RouterProvider router={router} />
           <ToastContainer position="top-center" />
           {modalOpen && <Modal setModalOpen={setModalOpen} />}
