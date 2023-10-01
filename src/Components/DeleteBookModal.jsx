@@ -7,7 +7,7 @@ function DeleteBookModal({ isOpen, onCancel, onDeleteCallback }) {
   return (
     isOpen && (
       <div
-        className="fixed z-0 inset-0 flex items-center justify-center w-screen h-screen bg-black bg-opacity-40"
+        className="fixed z-20 inset-0 flex items-center justify-center w-screen h-screen bg-black bg-opacity-40"
         onClick={onCancel}
       >
         <div className="relative z-10 w-72  py-2 text-center bg-white rounded-xl">

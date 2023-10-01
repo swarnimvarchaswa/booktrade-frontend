@@ -5,6 +5,7 @@ import moment from "moment"; // Import moment.js
 
 import io from "socket.io-client";
 const ENDPOINT = "https://booktrade-api.onrender.com";
+// const ENDPOINT = "http://localhost:5000";
 var socket;
 
 function formatTimestamp(timestamp) {
@@ -179,6 +180,23 @@ export default function ChatBox() {
     }
   };
 
+  // Add a new function to calculate the class based on the number of lines
+  const calculateClassForTwoLines = (content) => {
+    const container = document.createElement("div");
+    container.innerHTML = content;
+    document.body.appendChild(container);
+
+    const numberOfLines = Math.floor(
+      container.clientHeight /
+        parseFloat(getComputedStyle(container).lineHeight)
+    );
+    // console.log("Number of Lines:", numberOfLines);
+
+    container.remove();
+
+    return numberOfLines;
+  };
+
   return (
     <div className="lg:w-4/5 w-full fixed right-0 rounded">
       <div className="fixed w-full z-10">
@@ -230,17 +248,23 @@ export default function ChatBox() {
           </p>
           <br />
 
-          {messages.map((message, index) => (
-            <div
-              key={`${message._id || message.chat._id}-${index}`}
-              className={`font-r text-left text-lg my-2 rounded-2xl w-fit relative ${
-                message.sender._id === loggedInUserId
-                  ? "ml-auto bg-purple-600 text-white"
-                  : "mr-auto bg-gray-200 text-gray-800"
-              }`}
-            >              
+          {messages.map((message, index) => {
+            const numberOfLines = calculateClassForTwoLines(message.content);
+            return (
+              <div
+                key={`${message._id || message.chat._id}-${index}`}
+                className={`font-r text-left text-lg my-2 rounded-2xl w-fit relative ${
+                  message.sender._id === loggedInUserId
+                    ? "ml-auto bg-purple-600 text-white"
+                    : "mr-auto bg-gray-200 text-gray-800"
+                }`}
+              >
                 <p
-                  className={`font-r text-left text-base lg:text-lg pt-2 pl-3 pb-3 pr-[65px] lg:pr-[73px] rounded-2xl text-ellipsis overflow-hidden lg:max-w-[60vw] max-w-[75vw]`}
+                  className={`font-r text-left text-base lg:text-lg pt-2 pl-3 ${
+                    numberOfLines > 1
+                      ? "pb-6 pr-3"
+                      : "lg:pr-[73px] pb-3 pr-[63px]"
+                  } rounded-2xl text-ellipsis overflow-hidden lg:max-w-[60vw] max-w-[75vw]`}
                 >
                   {message.content}
                 </p>
@@ -253,10 +277,10 @@ export default function ChatBox() {
                 >
                   {formatTimestamp(message.createdAt)} {/* Format timestamp */}
                 </span>
-              </div>   
-          ))}
-
-          <br />
+              </div>
+            );
+          })}
+        <br />
           <br />
         </div>
         <div className="fixed bottom-0 bg-slate-50 pb-6 pt-2 pl-[3vw] pr-[3vw] flex items-center w-full">

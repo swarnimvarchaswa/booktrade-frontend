@@ -53,7 +53,7 @@ function People() {
                       />
                       {chat.users[0].isOnline && (
                         <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[4px] right-[8px] border-solid border-2 border-white"></div>
-                      )}{" "}
+                      )}
                     </Link>
                   </div>
                   <div className="basis-5/10 content place-self-center pr-2">
