@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+// import io from "socket.io-client";
+import { useSocket } from "../context/socketContext";
+
+// const socket = io("http://localhost:5000");
 
 function People() {
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const socket = useSocket();
 
   useEffect(() => {
     // Make a fetch request to retrieve chat data
@@ -24,6 +29,59 @@ function People() {
         setIsLoading(false);
       });
   }, []); // Empty dependency array ensures the fetch request runs once on component mount
+
+
+  useEffect(() => {
+    // Listen for online status updates
+    socket.on("getOnlineUser", (data) => {
+      // Update the online status of the user in the state
+      setChats((prevChats) =>
+        prevChats.map((chat) => {
+          if (chat.users[0]._id === data.user_id) {
+            return {
+              ...chat,
+              users: [
+                {
+                  ...chat.users[0],
+                  isOnline: true,
+                },
+              ],
+            };
+          }
+          return chat;
+        })
+      );
+    });
+
+    // Listen for offline status updates
+    socket.on("getOfflineUser", (data) => {
+      // Update the offline status of the user in the state
+      setChats((prevChats) =>
+        prevChats.map((chat) => {
+          if (chat.users[0]._id === data.user_id) {
+            return {
+              ...chat,
+              users: [
+                {
+                  ...chat.users[0],
+                  isOnline: false,
+                },
+              ],
+            };
+          }
+          return chat;
+        })
+      );
+    });
+
+    // Clean up event listeners when the component unmounts
+    return () => {
+      socket.off("getOnlineUser");
+      socket.off("getOfflineUser");
+    };
+  }, []); // Empty dependency array ensures the effect runs once on component mount
+
+
 
   return (
     <div className="max-w-md mx-auto px-4 pt-4">

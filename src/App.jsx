@@ -23,6 +23,7 @@ import DeleteProfilePic from "./Components/DeleteProfilePic";
 import ChooseBook from "./Pages/ChooseBook";
 import ChatPage from "./Pages/ChatPage";
 import IsOnline from "./context/socketContext";
+import { SocketProvider } from "./context/socketContext";
 
 import {
   createBrowserRouter,
@@ -215,10 +216,11 @@ function App() {
           value={{ setUserLogin, setModalOpen }}
           login={userLogin}
         >
-          <IsOnline />
-          <RouterProvider router={router} />
-          <ToastContainer position="top-center" />
-          {modalOpen && <Modal setModalOpen={setModalOpen} />}
+          <SocketProvider>
+            <RouterProvider router={router} />
+            <ToastContainer position="top-center" />
+            {modalOpen && <Modal setModalOpen={setModalOpen} />}
+          </SocketProvider>
         </LoginContext.Provider>
       </div>
     </>

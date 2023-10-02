@@ -3,10 +3,16 @@ import { Link, useParams } from "react-router-dom";
 import SendIcon from "../Features/Icons/SendIcon";
 import moment from "moment"; // Import moment.js
 
-import io from "socket.io-client";
-const ENDPOINT = "https://booktrade-api.onrender.com";
+// import io from "socket.io-client";
+// // // const ENDPOINT = "https://booktrade-api.onrender.com";
 // const ENDPOINT = "http://localhost:5000";
-var socket;
+// var socket;
+
+// import io from "socket.io-client";
+
+// const socket = io("http://localhost:5000");
+
+import { useSocket } from "../context/socketContext";
 
 function formatTimestamp(timestamp) {
   if (!timestamp) {
@@ -24,19 +30,20 @@ export default function ChatBox() {
   const [otherUserId, setOtherUserId] = useState("");
   const [newMessage, setNewMessage] = useState([]);
   const chatContainerRef = useRef(null);
+  const socket = useSocket();
 
   useEffect(() => {
     // Initialize Socket.io connection
-    socket = io(ENDPOINT);
+    // socket = io(ENDPOINT);
 
-    socket.on("connect", () => {
-      // console.log("Socket connected");
-    });
+    // socket.on("connect", () => {
+    //   // console.log("Socket connected");
+    // });
 
-    // Handle any errors that occur
-    socket.on("error", (error) => {
-      console.error("Socket error:", error);
-    });
+    // // Handle any errors that occur
+    // socket.on("error", (error) => {
+    //   console.error("Socket error:", error);
+    // });
 
     // Join the chat room with the chatId
     socket.emit("join chat", chatId);
