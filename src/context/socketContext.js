@@ -98,13 +98,13 @@ export const SocketProvider = ({ children }) => {
   // }
 
   if (localStorage.getItem("jwt")) {
-    // if (!socketReady) {
+    if (!socketReady) {
       // Return loading or placeholder component if the socket is not available
       return (
         <div className="max-w-md mx-auto px-12 h-screen container flex flex-col"> 
         <div className="my-auto">
           {/* <Navbar /> */}
-          <p className="text-gray-800 text-7xl pb-8 font-r font-normal text-center">
+          <p className="text-gray-800 text-6xl pb-8 font-r font-normal text-center">
         <span className="text-purple-700">book</span>trade
       </p>
       {/* <p className="font-t text-gray-500 tracking-wide text-[21px]">Unlock the Magic of Reading</p>  */}
@@ -115,7 +115,7 @@ export const SocketProvider = ({ children }) => {
           />
         </div></div>
       );
-    // }
+    }
   }
 
   return (
