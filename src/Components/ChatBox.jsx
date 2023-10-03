@@ -375,7 +375,7 @@ export default function ChatBox() {
     socket.on("message received", (newMessageReceived) => {
       // console.log("Received message:", newMessageReceived);
       if(newMessageReceived.sender._id !== otherUserId) {
-        socket.setIsNewMessage(true);
+        setIsNewMessage(true);
       }
       setMessages((prevMessages) => [...prevMessages, newMessageReceived]);
     });
