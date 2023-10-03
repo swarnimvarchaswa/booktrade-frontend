@@ -8,7 +8,8 @@ import { useSocket } from "../context/socketContext";
 function People() {
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const socket = useSocket();
+  // const {socket, setIsNewMessage, isNewMessage} = useSocket();
+  const {socket, setIsNewMessage, isNewMessage} = useSocket();
 
   useEffect(() => {
     // Make a fetch request to retrieve chat data

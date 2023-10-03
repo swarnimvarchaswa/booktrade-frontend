@@ -6,15 +6,17 @@ import SearchIcon from "../Features/Icons/SearchIcon";
 import NotificationIcon from "../Features/Icons/NotificationIcon";
 import ProfileIcon from "../Features/Icons/ProfileIcon";
 import SettingIcon from "../Features/Icons/SettingIcon";
+import { useSocket } from "../context/socketContext";
 
 function BottomNavBar() {
   const [notifications, setNotifications] = useState([]);
   const [checkTime, setCheckTime] = useState();
   const location = useLocation();
   const [showNotificationHR, setShowNotificationHR] = useState(false); // Control the visibility of <hr> tag
+  const {socket, setIsNewMessage, isNewMessage} = useSocket();
 
   if (location.pathname === "/notification") {
-    handleNotificationClick()
+    handleNotificationClick();
   }
 
   function handleNotificationClick() {
@@ -148,9 +150,10 @@ function BottomNavBar() {
             >
               <MessageIcon />
               <p className="fixed left-[72px]">Messsage</p>
-             
-                {/* <hr className="border-solid border-[6px] rounded-full z-50 border-purple-600 w-0 relative bottom-[9px] right-[27px]" /> */}
-            
+
+              {isNewMessage && (
+                <hr className="border-solid border-[6px] rounded-full z-50 border-purple-600 w-0 relative bottom-[9px] right-[27px]" />
+              )}
             </Link>
             <Link
               to="/search"
@@ -172,7 +175,7 @@ function BottomNavBar() {
               <NotificationIcon />
               <p className="fixed left-[72px]">Notification</p>
               {showNotificationHR && (
-              <hr className="border-solid border-[6px] rounded-full z-50 border-purple-600 w-0 relative bottom-[9px] right-[27px]" />
+                <hr className="border-solid border-[6px] rounded-full z-50 border-purple-600 w-0 relative bottom-[9px] right-[27px]" />
               )}
             </Link>
             <Link
@@ -216,7 +219,9 @@ function BottomNavBar() {
             }`}
           >
             <MessageIcon />
-            {/* <hr className="border-solid border-[3px] rounded-full border-purple-600 w-0 relative bottom-[-2px] left-[0px]" /> */}
+            {isNewMessage && (
+              <hr className="border-solid border-[3px] rounded-full border-purple-600 w-0 relative bottom-[-2px] left-[0px]" />
+            )}
           </Link>
           <Link
             to="/search"

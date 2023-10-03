@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import io from "socket.io-client";
-import Navbar from "../Components/Navbar";
 
 const SocketContext = createContext();
 
@@ -12,6 +11,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [lasttoken, setLasttoken] = useState(null);
   const [socketReady, setSocketReady] = useState(false);
+  const [isNewMessage, setIsNewMessage] = useState(false);
 
   // useEffect(() => {
   //   if (lasttoken !== localStorage.getItem("jwt")) {
@@ -119,7 +119,7 @@ export const SocketProvider = ({ children }) => {
   }
 
   return (
-    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={{socket, setIsNewMessage, isNewMessage}}>{children}</SocketContext.Provider>
   );
 };
 

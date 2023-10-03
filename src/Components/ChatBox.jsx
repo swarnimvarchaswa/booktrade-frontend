@@ -362,21 +362,11 @@ export default function ChatBox() {
 
   const [newMessage, setNewMessage] = useState([]);
   const chatContainerRef = useRef(null);
-  const socket = useSocket();
+  // const { socket, setIsNewMessage } = useSocket();
+  const {socket, setIsNewMessage, isNewMessage} = useSocket();
 
 
   useEffect(() => {
-    // Initialize Socket.io connection
-    // socket = io(ENDPOINT);
-
-    // socket.on("connect", () => {
-    //   // console.log("Socket connected");
-    // });
-
-    // // Handle any errors that occur
-    // socket.on("error", (error) => {
-    //   console.error("Socket error:", error);
-    // });
 
     // Join the chat room with the chatId
     socket.emit("join chat", chatId);
@@ -384,6 +374,9 @@ export default function ChatBox() {
     // Listen for incoming messages
     socket.on("message received", (newMessageReceived) => {
       // console.log("Received message:", newMessageReceived);
+      if(newMessageReceived.sender._id !== otherUserId) {
+        socket.setIsNewMessage(true);
+      }
       setMessages((prevMessages) => [...prevMessages, newMessageReceived]);
     });
 
