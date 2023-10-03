@@ -98,22 +98,24 @@ export const SocketProvider = ({ children }) => {
   // }
 
   if (localStorage.getItem("jwt")) {
-    if (!socketReady) {
+    // if (!socketReady) {
       // Return loading or placeholder component if the socket is not available
       return (
-        <div className="max-w-md mx-auto px-12 my-4 container flex flex-col"> 
+        <div className="max-w-md mx-auto px-12 h-screen container flex flex-col"> 
+        <div className="my-auto">
           {/* <Navbar /> */}
-          <h1 className="text-gray-800 text-5xl font-r font-normal py-10 text-center">
+          <p className="text-gray-800 text-7xl pb-8 font-r font-normal text-center">
         <span className="text-purple-700">book</span>trade
-      </h1>
-          {/* <img
-            className="max-w-md w-full mx-auto"
+      </p>
+      {/* <p className="font-t text-gray-500 tracking-wide text-[21px]">Unlock the Magic of Reading</p>  */}
+          <img
+            className="max-w-md w-2/3 mx-auto"
             src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
             alt="Loading"
-          /> */}
-        </div>
+          />
+        </div></div>
       );
-    }
+    // }
   }
 
   return (
