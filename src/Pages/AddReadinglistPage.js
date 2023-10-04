@@ -12,7 +12,7 @@ export default function AddReadinglistPage() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (!token) {
-      navigate("./login");
+      navigate("/login");
     }
   }, []);
 

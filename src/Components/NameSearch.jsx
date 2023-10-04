@@ -82,8 +82,7 @@ function People() {
     };
   }, []); // Empty dependency array ensures the effect runs once on component mount
 
-
-
+  
   return (
     <div className="max-w-md mx-auto px-4 pt-4">
       {isLoading ? (
@@ -102,9 +101,9 @@ function People() {
           {Array.isArray(chats) &&
             chats.map((chat) => (
               <div key={chat._id}>
-                <div className="flex flex-row border-0 rounded-lg py-1 my-2 hover:bg-purple-100 focus:bg-purple-100">
+                <Link to={`/message/${chat._id}`} className="flex flex-row border-0 rounded-lg py-1 my-2 hover:bg-purple-100 focus:bg-purple-100">
                   <div className="basis-3/10 flex justify-center relative z-0 whitespace-nowrap flex-shrink-0">
-                    <Link className=" mx-2 my-1" to={`/message/${chat._id}`}>
+                    <div className=" mx-2 my-1">
                       <img
                         className="h-[50px] w-[50px] rounded-full"
                         src={chat.users[0].profilePic} // Use the profile pic of the first user
@@ -113,11 +112,11 @@ function People() {
                       {chat.users[0].isOnline && (
                         <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[4px] right-[8px] border-solid border-2 border-white"></div>
                       )}
-                    </Link>
+                    </div>
                   </div>
                   <div className="basis-5/10 content place-self-center pr-2">
                     <div className="grid grid-row text-left text-base mx-2">
-                      <Link to={`/message/${chat._id}`}>
+                      <div>
                         <h2 className="pe-1 font-r tracking-wide line-clamp-1 text-xl text-purple-500">
                           {chat.users[0].name}{" "}
                           {/* Use the name of the first user */}
@@ -125,7 +124,7 @@ function People() {
                         <p className="font-r tracking-wide font-normal text-sm line-clamp-1 text-gray-400">
                           {chat.latestMessage}
                         </p>
-                      </Link>
+                      </div>
                     </div>
                   </div>
                   {/* <div className="basis-1/10 content place-self-center pr-2 mr-0 ml-auto mt-0">
@@ -140,7 +139,7 @@ function People() {
                       </Link>
                     </div>
                   </div> */}
-                </div>
+                  </Link>
                 <hr />
               </div>
             ))}

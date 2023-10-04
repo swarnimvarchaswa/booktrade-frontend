@@ -29,7 +29,6 @@
 //   const [otherUserProfilePic, setOtherUserProfilePic] = useState("");
 //   const [otherUserId, setOtherUserId] = useState("");
 //   const [otherUserStatus, setOtherUserStatus] = useState("");
-  
 
 //   const [newMessage, setNewMessage] = useState([]);
 //   const chatContainerRef = useRef(null);
@@ -223,7 +222,7 @@
 //             />
 //             {otherUserStatus && (
 //             <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[0px] right-[0px] border-solid border-2 border-white"></div>
-//               )} 
+//               )}
 //           </div>
 //           <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
 //             <span className="line-clamp-1 overflow-hidden">
@@ -323,11 +322,11 @@
 //   );
 // }
 
-
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SendIcon from "../Features/Icons/SendIcon";
 import moment from "moment"; // Import moment.js
+// import { toast } from "react-toastify";
 
 // import io from "socket.io-client";
 // // // const ENDPOINT = "https://booktrade-api.onrender.com";
@@ -357,32 +356,47 @@ export default function ChatBox() {
   const [otherUserStatus, setOtherUserStatus] = useState("");
   const [onlineStatus, setOnlineStatus] = useState({});
   const [chats, setChats] = useState([]);
-  
-  
 
   const [newMessage, setNewMessage] = useState([]);
   const chatContainerRef = useRef(null);
-  // const { socket, setIsNewMessage } = useSocket();
-  const {socket, setIsNewMessage, isNewMessage} = useSocket();
+  const { socket, setIsNewMessage, isNewMessage } = useSocket();
 
+  // const notifyB = (msg) => toast.success(msg);
 
   useEffect(() => {
-
     // Join the chat room with the chatId
     socket.emit("join chat", chatId);
-
+    // console.log(socket)
+    // console.log(socket.connected)
+    
     // Listen for incoming messages
     socket.on("message received", (newMessageReceived) => {
-      // console.log("Received message:", newMessageReceived);
-      if(newMessageReceived.sender._id !== otherUserId) {
+      // console.log(
+      //   "Received message:",
+      //   newMessageReceived.content,
+      //   newMessageReceived.chat._id
+      // );
+      // console.log("chat iddd:", chatId);
+
+      if (newMessageReceived.chat._id !== chatId) {
         setIsNewMessage(true);
+        // console.log("other user text me");
+        // console.log("try is here if falseeeee", socket.connected)
+        // alert(newMessageReceived.content)
       }
       setMessages((prevMessages) => [...prevMessages, newMessageReceived]);
+      // console.log("try is here", socket.connected)
     });
 
     // Clean up the socket connection when component unmounts
+    // return () => {
+    //   socket.disconnect();
+    // };
     return () => {
-      socket.disconnect();
+      // Leave the current chat room when the component unmounts
+      socket.emit("leave chat", chatId);
+      // socket.off("message received", handleIncomingMessage);
+      socket.off("message received");
     };
   }, [chatId]);
 
@@ -418,7 +432,7 @@ export default function ChatBox() {
         setOtherUserName(data.name);
         setOtherUserProfilePic(data.profilePic);
         setOtherUserId(data._id);
-        setOtherUserStatus(data.isOnline)
+        setOtherUserStatus(data.isOnline);
       })
       .catch((error) => {
         console.error("Error fetching other user data:", error);
@@ -531,66 +545,6 @@ export default function ChatBox() {
     return numberOfLines;
   };
 
-  useEffect(() => {
-    // Listen for online status updates
-    socket.on("getOnlineUser", (data) => {
-      setOnlineStatus((prevStatus) => ({
-        ...prevStatus,
-        [data.user_id]: true,
-      }));
-  
-      // Update the online status of the user in the state
-      setChats((prevChats) =>
-        prevChats.map((chat) => {
-          if (chat.users[0]._id === data.user_id) {
-            return {
-              ...chat,
-              users: [
-                {
-                  ...chat.users[0],
-                  isOnline: true,
-                },
-              ],
-            };
-          }
-          return chat;
-        })
-      );
-    });
-  
-    // Listen for offline status updates
-    socket.on("getOfflineUser", (data) => {
-      setOnlineStatus((prevStatus) => ({
-        ...prevStatus,
-        [data.user_id]: false,
-      }));
-  
-      // Update the offline status of the user in the state
-      setChats((prevChats) =>
-        prevChats.map((chat) => {
-          if (chat.users[0]._id === data.user_id) {
-            return {
-              ...chat,
-              users: [
-                {
-                  ...chat.users[0],
-                  isOnline: false,
-                },
-              ],
-            };
-          }
-          return chat;
-        })
-      );
-    });
-
-      // Clean up event listeners when the component unmounts
-  return () => {
-    socket.off("getOnlineUser");
-    socket.off("getOfflineUser");
-  };
-}, []);
-
   return (
     <div className="lg:w-4/5 w-full fixed right-0 rounded">
       <div className="fixed w-full z-10">
@@ -607,9 +561,9 @@ export default function ChatBox() {
             {/* {otherUserStatus && (
             <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[0px] right-[0px] border-solid border-2 border-white"></div>
               )}  */}
-              {otherUserStatus || onlineStatus[otherUserStatus] ? (
-  <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[4px] right-[8px] border-solid border-2 border-white"></div>
-) : null}
+            {otherUserStatus || onlineStatus[otherUserStatus] ? (
+              <div className="bg-green-500 w-4 h-4 absolute rounded-full bottom-[0px] right-[0px] border-solid border-2 border-white"></div>
+            ) : null}
           </div>
           <h3 className="text-left font-r font-normal tracking-wide text-2xl pl-3 py-4 bg-white text-purple-700">
             <span className="line-clamp-1 overflow-hidden">

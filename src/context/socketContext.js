@@ -13,13 +13,6 @@ export const SocketProvider = ({ children }) => {
   const [socketReady, setSocketReady] = useState(false);
   const [isNewMessage, setIsNewMessage] = useState(false);
 
-  // useEffect(() => {
-  //   if (lasttoken !== localStorage.getItem("jwt")) {
-  //     fetchData()
-  //     setLasttoken = localStorage.getItem("jwt")
-  //   }
-  // }, []);
-
   useEffect(() => {
     const fetchDataIfNeeded = () => {
       if (lasttoken !== localStorage.getItem("jwt")) {
@@ -37,10 +30,6 @@ export const SocketProvider = ({ children }) => {
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
   }, [lasttoken]); // Include lasttoken in the dependency array
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const fetchData = async () => {
     try {
@@ -88,38 +77,32 @@ export const SocketProvider = ({ children }) => {
     }
   };
 
-  // {lasttoken && !socketReady && (
-  //   <div> loading </div>
-  // )}
-
-  // if (!socketReady) {
-  //   // Return loading or placeholder component if the socket is not available
-  //   return <div> loading </div>;
-  // }
-
   if (localStorage.getItem("jwt")) {
     if (!socketReady) {
       // Return loading or placeholder component if the socket is not available
       return (
-        <div className="max-w-md mx-auto px-12 h-screen container flex flex-col"> 
-        <div className="my-auto">
-          {/* <Navbar /> */}
-          <p className="text-gray-800 text-6xl pb-8 font-r font-normal text-center">
-        <span className="text-purple-700">book</span>trade
-      </p>
-      {/* <p className="font-t text-gray-500 tracking-wide text-[21px]">Unlock the Magic of Reading</p>  */}
-          <img
-            className="max-w-md w-2/3 mx-auto"
-            src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
-            alt="Loading"
-          />
-        </div></div>
+        <div className="max-w-md mx-auto px-12 h-screen container flex flex-col">
+          <div className="my-auto">
+            {/* <Navbar /> */}
+            <p className="text-gray-800 text-6xl pb-8 font-r font-normal text-center">
+              <span className="text-purple-700">book</span>trade
+            </p>
+            {/* <p className="font-t text-gray-500 tracking-wide text-[21px]">Unlock the Magic of Reading</p>  */}
+            <img
+              className="max-w-md w-2/3 mx-auto"
+              src="https://res.cloudinary.com/booktrade/image/upload/v1695586780/Circle_Loader_nkgtip.gif"
+              alt="Loading"
+            />
+          </div>
+        </div>
       );
     }
   }
 
   return (
-    <SocketContext.Provider value={{socket, setIsNewMessage, isNewMessage}}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={{ socket, setIsNewMessage, isNewMessage }}>
+      {children}
+    </SocketContext.Provider>
   );
 };
 

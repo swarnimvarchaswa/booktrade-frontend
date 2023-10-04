@@ -1,6 +1,8 @@
 import React from "react";
+import { useSocket } from "../context/socketContext";
 
 export default function Modal({ setModalOpen }) {
+  const {socket, setIsNewMessage, isNewMessage} = useSocket();
 
   return (
     <div
@@ -18,6 +20,9 @@ export default function Modal({ setModalOpen }) {
             onClick={() => {
               setModalOpen(false);
               localStorage.clear();
+              if (socket) {
+                socket.disconnect();
+              }
             }}
           >
             Log out
