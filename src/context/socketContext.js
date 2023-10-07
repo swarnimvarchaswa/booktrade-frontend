@@ -14,6 +14,9 @@ export const SocketProvider = ({ children }) => {
   const [isNewMessage, setIsNewMessage] = useState(false);
 
   useEffect(() => {
+
+//  random commit
+
     const fetchDataIfNeeded = () => {
       if (lasttoken !== localStorage.getItem("jwt")) {
         fetchData();
@@ -21,7 +24,7 @@ export const SocketProvider = ({ children }) => {
       }
     };
 
-    // Initial call
+       // Initial call
     fetchDataIfNeeded();
 
     // Set up interval to check for token changes every 10 seconds
