@@ -21,7 +21,7 @@ function BookList({ data, loggedInUserId }) {
     pink: "bg-pink-100 border-pink-300",
   };
 
-  // Function to load more  books
+  // Function to load more books
   const loadMoreBooks = () => {
     setVisibleBooks((prevVisibleBooks) => prevVisibleBooks + 10); // Load the next 10 books
   };
