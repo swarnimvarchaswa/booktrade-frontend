@@ -15,7 +15,6 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
 
-
     const fetchDataIfNeeded = () => {
       if (lasttoken !== localStorage.getItem("jwt")) {
         fetchData();
