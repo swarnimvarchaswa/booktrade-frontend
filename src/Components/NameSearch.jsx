@@ -9,7 +9,7 @@ function People() {
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   // const {socket, setIsNewMessage, isNewMessage} = useSocket();
-  const {socket, setIsNewMessage, isNewMessage} = useSocket();
+  const { socket, setIsNewMessage, isNewMessage } = useSocket();
 
   useEffect(() => {
     // Make a fetch request to retrieve chat data
@@ -31,10 +31,36 @@ function People() {
       });
   }, []); // Empty dependency array ensures the fetch request runs once on component mount
 
+  // useEffect(() => {
+  //   socket.on("new notification", (newMessageReceived) => {
+  //     console.log("new notification recieved:", newMessageReceived);
+
+  //     // Access other user's ID
+  //     // const otherUserIds = newMessageReceived.chat.users;
+
+  //     // const otherUserId = otherUserIds.find(
+  //     //   (userId) => userId !== newMessageReceived.sender._id
+  //     // )
+
+  //     const otherUserId = newMessageReceived.chat.users.find(
+  //       (userId) => userId !== newMessageReceived.sender._id
+  //     );
+
+  //     console.log("Other User's ID:", otherUserId);
+
+  //     // const currentRoom = Object.keys(socket.rooms)[1];
+
+  //     // console.log("Current Room:", currentRoom);
+  //   });
+  //   return () => {
+  //     socket.off("new notification");
+  //   };
+  // }, []);
 
   useEffect(() => {
     // Listen for online status updates
     socket.on("getOnlineUser", (data) => {
+      // console.log(data.user_id)
       // Update the online status of the user in the state
       setChats((prevChats) =>
         prevChats.map((chat) => {
@@ -82,7 +108,12 @@ function People() {
     };
   }, []); // Empty dependency array ensures the effect runs once on component mount
 
+  // useEffect(() => {
+  //   console.log("Socket Connection Status:", socket.connected);
   
+  //   // Rest of your code...
+  // }, [socket]); 
+
   return (
     <div className="max-w-md mx-auto px-4 pt-4">
       {isLoading ? (
@@ -101,7 +132,10 @@ function People() {
           {Array.isArray(chats) &&
             chats.map((chat) => (
               <div key={chat._id}>
-                <Link to={`/message/${chat._id}`} className="flex flex-row border-0 rounded-lg py-1 my-2 hover:bg-purple-100 focus:bg-purple-100">
+                <Link
+                  to={`/message/${chat._id}`}
+                  className="flex flex-row border-0 rounded-lg py-1 my-2 hover:bg-purple-100 focus:bg-purple-100"
+                >
                   <div className="basis-3/10 flex justify-center relative z-0 whitespace-nowrap flex-shrink-0">
                     <div className=" mx-2 my-1">
                       <img
@@ -139,7 +173,7 @@ function People() {
                       </Link>
                     </div>
                   </div> */}
-                  </Link>
+                </Link>
                 <hr />
               </div>
             ))}

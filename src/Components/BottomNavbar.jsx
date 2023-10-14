@@ -12,8 +12,22 @@ function BottomNavBar() {
   const [notifications, setNotifications] = useState([]);
   const [checkTime, setCheckTime] = useState();
   const location = useLocation();
+  // const [loggedInUserId, setLoggedInUserId] = useState(null);
   const [showNotificationHR, setShowNotificationHR] = useState(false); // Control the visibility of <hr> tag
-  const {socket, setIsNewMessage, isNewMessage} = useSocket();
+  const { socket, setIsNewMessage, isNewMessage } = useSocket();
+
+  // useEffect(() => {
+  //   fetch("https://booktrade-api.onrender.com/loginuser", {
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
+  //     },
+  //   })
+  //     .then((res) => res.text())
+  //     .then((userId) => {
+  //       setLoggedInUserId(userId);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   if (location.pathname === "/notification") {
     handleNotificationClick();
@@ -147,12 +161,13 @@ function BottomNavBar() {
               className={`px-4 py-4 gap-4 flex flex-row items-center hover:text-purple-500  text-gray-700 font-r tracking-wider ${
                 location.pathname === "/message" ? "text-purple-500" : ""
               }`}
+              onClick={() => setIsNewMessage(false)}
             >
               <MessageIcon />
               <p className="fixed left-[72px]">Messsage</p>
 
               {isNewMessage && (
-                <hr className="border-solid border-[6px] rounded-full z-50 border-purple-600 w-0 relative bottom-[9px] right-[27px]" />
+                <hr className="border-solid border-[6px] rounded-full z-50 border-purple-600 w-0 relative bottom-[9px] right-[26px]" />
               )}
             </Link>
             <Link
@@ -217,10 +232,13 @@ function BottomNavBar() {
             className={`flex flex-col mb-2 items-center text-gray-700 ${
               location.pathname === "/message" ? "text-purple-500" : ""
             }`}
+            onClick={() => setIsNewMessage(false)}
           >
             <MessageIcon />
-            {isNewMessage && (
-              <hr className="border-solid border-[3px] rounded-full border-purple-600 w-0 relative bottom-[-2px] left-[0px]" />
+            {isNewMessage ? (
+              <hr className="border-solid border-[3px] rounded-full z-50 border-purple-600 w-0 relative bottom-[-2px] left-[0px]" />
+            ) : (
+              <hr className="border-solid border-[3px] rounded-full z-50 opacity-0 border-purple-600 w-0 relative bottom-[-2px] left-[0px]" />
             )}
           </Link>
           <Link
