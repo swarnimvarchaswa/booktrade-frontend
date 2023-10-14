@@ -240,8 +240,8 @@ export const SocketProvider = ({ children }) => {
         }
 
         // Set up a new socket connection
-        const ENDPOINT = "http://localhost:5000";
-        // const ENDPOINT = "https://booktrade-api.onrender.com";
+        // const ENDPOINT = "http://localhost:5000";
+        const ENDPOINT = "https://booktrade-api.onrender.com";
 
         const connectSocket = () => {
           const newSocket = io(ENDPOINT);
