@@ -61,7 +61,6 @@ export default function ChatBox() {
       // console.log(
       //   "Received message:",
       //   newMessageReceived.content,
-      //   newMessageReceived.chat._id
       // );
       // console.log("chat iddd:", chatId);
 
