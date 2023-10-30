@@ -229,16 +229,16 @@ function BottomNavBar() {
 
           <Link
             to="/message"
-            className={`flex flex-col mb-2 items-center text-gray-700 ${
+            className={`flex flex-col pb-1 items-center text-gray-700 ${
               location.pathname === "/message" ? "text-purple-500" : ""
             }`}
             onClick={() => setIsNewMessage(false)}
           >
             <MessageIcon />
             {isNewMessage ? (
-              <hr className="border-solid border-[3px] rounded-full z-50 border-purple-600 w-0 relative bottom-[-2px] left-[0px]" />
+              <hr className="border-solid border-[3px] rounded-full z-50 border-purple-600 w-0 relative bottom-[-2px] " />
             ) : (
-              <hr className="border-solid border-[3px] rounded-full z-50 opacity-0 border-purple-600 w-0 relative bottom-[-2px] left-[0px]" />
+              <hr className="border-solid border-[3px] rounded-full z-50 opacity-0 border-purple-600 w-0 relative bottom-[-2px] " />
             )}
           </Link>
           <Link
