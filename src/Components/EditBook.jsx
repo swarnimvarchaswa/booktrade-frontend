@@ -10,6 +10,7 @@ function EditBook() {
   const [bookCondition, setBookCondition] = useState("");
   const [bookCoverColor, setBookCoverColor] = useState("");
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Fetch the book data to pre-fill the form
@@ -56,6 +57,10 @@ function EditBook() {
       isValid = false;
     }
 
+    if (!bookCondition) {
+      newErrors.bookConditionError = "Select Book Condition";
+      isValid = false;
+    }
 
     if (!bookCoverColor) {
       newErrors.bookCoverColorError = "Select Book Cover Color";
@@ -74,6 +79,7 @@ function EditBook() {
         bookCondition,
         bookCoverColor,
       };
+      setIsLoading(true);
 
       fetch(`https://booktrade-api.onrender.com/editbook/${bookId}`, {
         method: "POST",
@@ -155,7 +161,8 @@ function EditBook() {
           id="bookCondition"
           name="bookCondition"
           value={bookCondition}
-          onChange={(e) => setBookCondition({ bookCondition: e.target.value })}
+          // onChange={(e) => setBookCondition({ bookCondition: e.target.value })}
+          onChange={(e) => setBookCondition(e.target.value)}
         >
           <option disabled value="">
             Book Condition
@@ -204,11 +211,28 @@ function EditBook() {
       </div>
 
       <div className="grid justify-stretch mt-10 font-r tracking-wider">
-        <button
+        {/* <button
           className="bg-purple-600 hover:bg-purple-700 text-white text-lg py-2 px-4 rounded-md"
           onClick={postDetails}
         >
           Save Changes
+        </button> */}
+        <button
+          className={`${
+            isLoading ? "bg-purple-600 py-[1px]" : "bg-purple-600 hover:bg-purple-700 py-3"
+          } text-white rounded flex items-center justify-center`}
+          onClick={postDetails}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <img
+              className="h-10 "
+              src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-22-68_512.gif"
+              alt="Loading"
+            /> // Replace with your loading image path
+          ) : (
+            <div>Save Changes</div>
+          )}
         </button>
       </div>
       <br />

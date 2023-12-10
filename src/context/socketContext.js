@@ -82,7 +82,7 @@
 //       console.error("Error fetching data:", error);
 //     }
 //   };
-                                    
+
 //   if (localStorage.getItem("jwt")) {
 //     if (!socketReady) {
 //       // Return loading or placeholder component if the socket is not available
@@ -312,8 +312,6 @@
 
 // export default SocketProvider;
 
-
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import io from "socket.io-client";
 // import { useLocation, useParams } from "react-router-dom";
@@ -402,6 +400,15 @@ export const SocketProvider = ({ children }) => {
               //     notification.close();
               //   }, 5000);
               // }
+
+
+              // Notification.requestPermission().then(perm => {
+              //   if (perm === "granted") {
+              //     new Notification("Example Notification", {
+              //       body: "this is booktrade",
+              //     })
+              //   }
+              // })
             }
           })
           .catch((err) => console.log(err));
@@ -439,8 +446,8 @@ export const SocketProvider = ({ children }) => {
         }
 
         // Set up a new socket connection
-        // const ENDPOINT = "http://localhost:5000";
-        const ENDPOINT = "https://booktrade-api.onrender.com";
+        const ENDPOINT = "http://localhost:5000";
+        // const ENDPOINT = "https://booktrade-api.onrender.com";
 
         const connectSocket = () => {
           const newSocket = io(ENDPOINT);

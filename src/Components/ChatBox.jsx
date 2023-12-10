@@ -29,7 +29,7 @@ export default function ChatBox() {
   const { socket, setIsNewMessage, isNewMessage } = useSocket();
 
   // const notifyB = (msg) => toast.success(msg);
- 
+
   useEffect(() => {
     fetch(`https://booktrade-api.onrender.com/messageRead/${chatId}`, {
       headers: {
@@ -177,6 +177,7 @@ export default function ChatBox() {
         // console.log(data.messages)
 
         socket.emit("join chat", chatId);
+
       } catch (error) {
         console.error("Error fetching messages:", error);
       }
