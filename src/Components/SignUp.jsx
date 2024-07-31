@@ -35,7 +35,7 @@ function SignUp() {
   }, [collegeNameInput]);
 
   const fetchCollegeNameSuggestions = (input) => {
-    fetch(`https://booktrade-api.onrender.com/colleges?query=${input}`)
+    fetch(`https://booktrade-backend.vercel.app//colleges?query=${input}`)
       .then((response) => response.json())
       .then((data) => {
         setCollegeNameSuggestions(data.collegeNames);
@@ -75,7 +75,7 @@ function SignUp() {
     }
 
     //sending data to server
-    fetch("https://booktrade-api.onrender.com/signup", {
+    fetch("https://booktrade-backend.vercel.app//signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
