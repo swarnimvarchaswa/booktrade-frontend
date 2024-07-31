@@ -53,7 +53,7 @@ function BookList({ data, loggedInUserId }) {
   const handleGetThisBookClick = async (book) => {
     setSelectedBook(book);
     try {
-      const response = await fetch("https://booktrade-backend.vercel.app//notification", {
+      const response = await fetch("https://booktrade-backend.vercel.app/notification", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
