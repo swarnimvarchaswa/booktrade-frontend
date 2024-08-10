@@ -95,7 +95,7 @@ export default function UpdateProfilePic() {
 
   const PostPic = (imageUrl) => {
     try {
-      fetch("https://booktrade-backend.vercel.app/uploadProfilePic", {
+      fetch("https://booktrade-api.onrender.com/uploadProfilePic", {
         method: "put",
         headers: {
           "Content-Type": "application/json",

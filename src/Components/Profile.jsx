@@ -111,7 +111,7 @@ function Profile({ user }) {
   };
 
   useEffect(() => {
-    fetch("https://booktrade-backend.vercel.app/loginuser", {
+    fetch("https://booktrade-api.onrender.com/loginuser", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },

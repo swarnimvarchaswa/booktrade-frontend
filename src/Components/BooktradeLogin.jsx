@@ -33,7 +33,7 @@ function Login() {
     }
 
     //sending data to server
-    fetch("https://booktrade-backend.vercel.app/login", {
+    fetch("https://booktrade-api.onrender.com/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

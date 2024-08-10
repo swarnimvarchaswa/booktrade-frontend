@@ -20,7 +20,7 @@ function EditProfile() {
   const emailRegex = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
   useEffect(() => {
-    fetch("https://booktrade-backend.vercel.app/userdetail", {
+    fetch("https://booktrade-api.onrender.com/userdetail", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -58,7 +58,7 @@ const UpdateProfile = () => {
         collegeDegree,
         year
       };
-      fetch("https://booktrade-backend.vercel.app/editprofile", {
+      fetch("https://booktrade-api.onrender.com/editprofile", {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),

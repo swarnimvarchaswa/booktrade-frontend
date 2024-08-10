@@ -13,7 +13,7 @@ function People() {
 
   useEffect(() => {
     // Make a fetch request to retrieve chat data
-    fetch("https://booktrade-backend.vercel.app/chat", {
+    fetch("https://booktrade-api.onrender.com/chat", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
