@@ -31,7 +31,7 @@ export default function ChatBox() {
   // const notifyB = (msg) => toast.success(msg);
 
   useEffect(() => {
-    fetch(`https://booktrade-backend.vercel.app/messageRead/${chatId}`, {
+    fetch(`https://booktrade-api.onrender.com/messageRead/${chatId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -117,7 +117,7 @@ export default function ChatBox() {
 
   // Fetch logged-in user id
   useEffect(() => {
-    fetch("https://booktrade-backend.vercel.app/loginuser", {
+    fetch("https://booktrade-api.onrender.com/loginuser", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -131,7 +131,7 @@ export default function ChatBox() {
 
   // Fetch other user's name and profile picture
   useEffect(() => {
-    fetch(`https://booktrade-backend.vercel.app/chat/${chatId}`, {
+    fetch(`https://booktrade-api.onrender.com/chat/${chatId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -159,7 +159,7 @@ export default function ChatBox() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://booktrade-backend.vercel.app/message/${chatId}`,
+          `https://booktrade-api.onrender.com/message/${chatId}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -216,7 +216,7 @@ export default function ChatBox() {
       content: newMessage,
     });
 
-    fetch(`https://booktrade-backend.vercel.app/message`, {
+    fetch(`https://booktrade-api.onrender.com/message`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -8,7 +8,7 @@ function BookDetails({ selectedBook, loggedInUserId, onDelete }) {
   const navigate = useNavigate();
 
   const handleRequest = (type) => {
-    fetch("https://booktrade-backend.vercel.app/notification", {
+    fetch("https://booktrade-api.onrender.com/notification", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function BookDetails({ selectedBook, loggedInUserId, onDelete }) {
 
   function handleSendMessage(userId) {
     // Make a fetch request to create or retrieve a chat
-    fetch("https://booktrade-backend.vercel.app/chat", {
+    fetch("https://booktrade-api.onrender.com/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

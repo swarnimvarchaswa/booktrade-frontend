@@ -22,7 +22,7 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://booktrade-backend.vercel.app/userdetail", {
+    fetch("https://booktrade-api.onrender.com/userdetail", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -48,7 +48,7 @@ function HomePage() {
 
   useEffect(() => {
     if (activeTab === 1) {
-      fetch("https://booktrade-backend.vercel.app/myposts", {
+      fetch("https://booktrade-api.onrender.com/myposts", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
@@ -62,7 +62,7 @@ function HomePage() {
   }, [activeTab]);
 
   useEffect(() => {
-    fetch("https://booktrade-backend.vercel.app/loginuser", {
+    fetch("https://booktrade-api.onrender.com/loginuser", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -76,7 +76,7 @@ function HomePage() {
 
   useEffect(() => {
     if (activeTab === 2) {
-      fetch("https://booktrade-backend.vercel.app/readinglist", {
+      fetch("https://booktrade-api.onrender.com/readinglist", {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -102,7 +102,7 @@ function HomePage() {
     console.log("Reading list before delete:", readingList.readingList);
     // Make a DELETE request to your server to delete the item
     fetch(
-      `https://booktrade-backend.vercel.app/readinglist/${[itemToDelete]}`,
+      `https://booktrade-api.onrender.com/readinglist/${[itemToDelete]}`,
       {
         method: "DELETE",
         headers: {

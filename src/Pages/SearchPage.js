@@ -41,7 +41,7 @@ function SearchPage() {
       return;
     }
 
-    const apiUrl = `https://booktrade-backend.vercel.app/${
+    const apiUrl = `https://booktrade-api.onrender.com/${
       activeTab === 1
         ? `searchbook?bookName=${encodeURIComponent(searchQuery)}&tab=1`
         : `searchuser?name=${encodeURIComponent(searchQuery)}&tab=2`

@@ -25,7 +25,7 @@ export default function SetAvailability() {
   };
 
   const fetchBookDetail = () => {
-    fetch(`https://booktrade-backend.vercel.app/detail/${bookId}`, {
+    fetch(`https://booktrade-api.onrender.com/detail/${bookId}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -42,7 +42,7 @@ export default function SetAvailability() {
       availability: bookAvailability,
     };
 
-    fetch(`https://booktrade-backend.vercel.app/availability/${bookId}`, {
+    fetch(`https://booktrade-api.onrender.com/availability/${bookId}`, {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -83,7 +83,7 @@ export default function SetAvailability() {
   }, [bookId]);
 
   const fetchAvailableDate = () => {
-    fetch(`https://booktrade-backend.vercel.app/availabledate/${bookId}`, {
+    fetch(`https://booktrade-api.onrender.com/availabledate/${bookId}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -107,7 +107,7 @@ export default function SetAvailability() {
       const newDate = new Date(currentDate);
       newDate.setDate(currentDate.getDate() + counterData);
 
-      fetch(`https://booktrade-backend.vercel.app/availabledate/${bookId}`, {
+      fetch(`https://booktrade-api.onrender.com/availabledate/${bookId}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),

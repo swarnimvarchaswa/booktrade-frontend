@@ -17,7 +17,7 @@ function BottomNavBar() {
   const { socket, setIsNewMessage, isNewMessage } = useSocket();
 
   // useEffect(() => {
-  //   fetch("https://booktrade-backend.vercel.app/loginuser", {
+  //   fetch("https://booktrade-api.onrender.com/loginuser", {
   //     headers: {
   //       Authorization: "Bearer " + localStorage.getItem("jwt"),
   //     },
@@ -36,7 +36,7 @@ function BottomNavBar() {
   function handleNotificationClick() {
     // Add logic to handle the notification click
     // For example, you can make a fetch request to your server to update the notificationCheck field
-    fetch("https://booktrade-backend.vercel.app/updateNotificationCheck", {
+    fetch("https://booktrade-api.onrender.com/updateNotificationCheck", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function BottomNavBar() {
       // Use an async function to fetch the notificationCheck value
       const fetchNotificationCheck = async () => {
         const response = await fetch(
-          "https://booktrade-backend.vercel.app/getNotificationCheck", // Assuming this is the correct route
+          "https://booktrade-api.onrender.com/getNotificationCheck", // Assuming this is the correct route
           {
             method: "GET",
             headers: {
@@ -108,7 +108,7 @@ function BottomNavBar() {
       // Use an async function to fetch data and set state
       const fetchData = async () => {
         const response = await fetch(
-          "https://booktrade-backend.vercel.app/notification",
+          "https://booktrade-api.onrender.com/notification",
           {
             method: "GET",
             headers: {
