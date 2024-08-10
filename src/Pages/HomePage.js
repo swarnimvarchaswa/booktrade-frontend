@@ -27,7 +27,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (activeTab === 1) {
-      fetch("https://booktrade-api.onrender.com/allposts", {
+      fetch("https://booktrade-backend.vercel.app//allposts", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
@@ -39,7 +39,7 @@ export default function HomePage() {
         })
         .catch((err) => console.log(err));
     } else if (activeTab === 2) {
-      fetch("https://booktrade-api.onrender.com/postsByUserReadingList", {
+      fetch("https://booktrade-backend.vercel.app//postsByUserReadingList", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
@@ -54,7 +54,7 @@ export default function HomePage() {
   }, [activeTab]);
 
   useEffect(() => {
-    fetch("https://booktrade-api.onrender.com/loginuser", {
+    fetch("https://booktrade-backend.vercel.app//loginuser", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },

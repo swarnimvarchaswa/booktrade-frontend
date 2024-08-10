@@ -19,7 +19,7 @@ export default function ChoosePage() {
   }, []);
 
   useEffect(() => {
-    fetch(`https://booktrade-api.onrender.com/user/${userId}`, {
+    fetch(`https://booktrade-backend.vercel.app//user/${userId}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -43,7 +43,7 @@ export default function ChoosePage() {
     }
     // setSelectedBook(book);
     try {
-      const response = await fetch("https://booktrade-api.onrender.com/notification", {
+      const response = await fetch("https://booktrade-backend.vercel.app//notification", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -15,7 +15,7 @@ function Notification() {
 
   //login user id
   useEffect(() => {
-    fetch("https://booktrade-api.onrender.com/loginuser", {
+    fetch("https://booktrade-backend.vercel.app//loginuser", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -36,7 +36,7 @@ function Notification() {
     try {
       // Send a GET request to fetch notifications
       const response = await fetch(
-        "https://booktrade-api.onrender.com/notification",
+        "https://booktrade-backend.vercel.app//notification",
         {
           method: "GET",
           headers: {
@@ -63,7 +63,7 @@ function Notification() {
   const rejectRequest = async (notification) => {
     try {
       const response = await fetch(
-        "https://booktrade-api.onrender.com/notification",
+        "https://booktrade-backend.vercel.app//notification",
         {
           method: "PUT",
           headers: {
@@ -91,7 +91,7 @@ function Notification() {
   const acceptBorrowRequest = async (notification) => {
     try {
       const response = await fetch(
-        "https://booktrade-api.onrender.com/notification",
+        "https://booktrade-backend.vercel.app//notification",
         {
           method: "PUT",
           headers: {
@@ -120,7 +120,7 @@ function Notification() {
   const confirmButton = async (notification) => {
     try {
       const response = await fetch(
-        "https://booktrade-api.onrender.com/exchange",
+        "https://booktrade-backend.vercel.app//exchange",
         {
           method: "PUT",
           headers: {
@@ -149,7 +149,7 @@ function Notification() {
   const confirmExchange = async (notification) => {
     try {
       const response = await fetch(
-        "https://booktrade-api.onrender.com/exchange",
+        "https://booktrade-backend.vercel.app//exchange",
         {
           method: "PUT",
           headers: {
@@ -183,7 +183,7 @@ function Notification() {
   const exchangeBook = async (notificationId) => {
     try {
       const response = await fetch(
-        "https://booktrade-api.onrender.com/exchangebook",
+        "https://booktrade-backend.vercel.app//exchangebook",
         {
           method: "PUT",
           headers: {
@@ -210,7 +210,7 @@ function Notification() {
   const confirmExchangeborrow = async (notification) => {
     try {
       const response = await fetch(
-        "https://booktrade-api.onrender.com/exchange",
+        "https://booktrade-backend.vercel.app//exchange",
         {
           method: "PUT",
           headers: {
@@ -237,7 +237,7 @@ function Notification() {
 
   function handleSendMessage(userId) {
     // Make a fetch request to create or retrieve a chat
-    fetch("https://booktrade-api.onrender.com/chat", {
+    fetch("https://booktrade-backend.vercel.app//chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -258,7 +258,7 @@ function Notification() {
   function handleNotificationClick() {
     // Add logic to handle the notification click
     // For example, you can make a fetch request to your server to update the notificationCheck field
-    fetch("https://booktrade-api.onrender.com/updateNotificationCheck", {
+    fetch("https://booktrade-backend.vercel.app//updateNotificationCheck", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
