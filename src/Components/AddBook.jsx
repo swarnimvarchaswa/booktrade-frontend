@@ -75,7 +75,7 @@ const BookForm = () => {
   useEffect(() => {
     if (url) {
       //saving post to mongodb
-      fetch("https://booktrade-backend.vercel.app//addbook", {
+      fetch("https://booktrade-backend.vercel.app/addbook", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

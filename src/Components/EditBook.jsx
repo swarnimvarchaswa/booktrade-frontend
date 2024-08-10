@@ -14,7 +14,7 @@ function EditBook() {
 
   useEffect(() => {
     // Fetch the book data to pre-fill the form
-    fetch(`https://booktrade-backend.vercel.app//editbook/${bookId}`, {
+    fetch(`https://booktrade-backend.vercel.app/editbook/${bookId}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -81,7 +81,7 @@ function EditBook() {
       };
       setIsLoading(true);
 
-      fetch(`https://booktrade-backend.vercel.app//editbook/${bookId}`, {
+      fetch(`https://booktrade-backend.vercel.app/editbook/${bookId}`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
