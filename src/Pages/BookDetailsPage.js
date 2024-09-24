@@ -16,7 +16,7 @@ function BookDetailsPage() {
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    fetch(`https://booktrade-api.onrender.com/detail/${bookIdUrl}`, {
+    fetch(`https://booktrade-backend.vercel.app/detail/${bookIdUrl}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -32,7 +32,7 @@ function BookDetailsPage() {
   }, []);
 
   useEffect(() => {
-    fetch("https://booktrade-api.onrender.com/loginuser", {
+    fetch("https://booktrade-backend.vercel.app/loginuser", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -58,7 +58,7 @@ function BookDetailsPage() {
 
   const handleDeleteBook = () => {
     // Send a DELETE request to your API to delete the book by its ID
-    fetch(`https://booktrade-api.onrender.com/deleteBook/${bookIdUrl}`, {
+    fetch(`https://booktrade-backend.vercel.app/deleteBook/${bookIdUrl}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),

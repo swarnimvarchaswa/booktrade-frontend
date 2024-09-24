@@ -34,7 +34,7 @@ function Login() {
     }
 
     //sending data to server
-    fetch("https://booktrade-api.onrender.com/login", {
+    fetch("https://booktrade-backend.vercel.app/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function Login() {
     setIsLoadingGuest(true);
 
     //sending data to server
-    fetch("https://booktrade-api.onrender.com/login", {
+    fetch("https://booktrade-backend.vercel.app/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

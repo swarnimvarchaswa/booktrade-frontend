@@ -19,7 +19,7 @@ export default function ChangePassword() {
     }
 
     // Send a PUT request to change the password
-    fetch("https://booktrade-api.onrender.com/changepassword", {
+    fetch("https://booktrade-backend.vercel.app/changepassword", {
       method: "PUT", // Change this to PUT
       headers: {
         "Content-Type": "application/json",

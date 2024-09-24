@@ -25,7 +25,7 @@ export default function UserProfile() {
   }, []);
 
   useEffect(() => {
-    fetch("https://booktrade-api.onrender.com/loginuser", {
+    fetch("https://booktrade-backend.vercel.app/loginuser", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -48,7 +48,7 @@ export default function UserProfile() {
   };
 
   useEffect(() => {
-    fetch(`https://booktrade-api.onrender.com/user/${userId}`, {
+    fetch(`https://booktrade-backend.vercel.app/user/${userId}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -71,7 +71,7 @@ export default function UserProfile() {
 
   function handleSendMessage(userId) {
     // Make a fetch request to create or retrieve a chat
-    fetch("https://booktrade-api.onrender.com/chat", {
+    fetch("https://booktrade-backend.vercel.app/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

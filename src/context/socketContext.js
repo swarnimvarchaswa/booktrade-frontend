@@ -41,7 +41,7 @@
 //     try {
 //       const fetchUser = async () => {
 //         const response = await fetch(
-//           "https://booktrade-api.onrender.com/loginuser",
+//           "https://booktrade-backend.vercel.app/loginuser",
 //           {
 //             headers: {
 //               Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -63,7 +63,7 @@
 
 //         // Set up a new socket connection
 //         const ENDPOINT = "http://localhost:5000";
-//         // const ENDPOINT = "https://booktrade-api.onrender.com";
+//         // const ENDPOINT = "https://booktrade-backend.vercel.app";
 //         const newSocket = io(ENDPOINT);
 
 //         // Set up socket authentication
@@ -162,7 +162,7 @@
 
 //   // useEffect(() => {
 //   //   if (socket) {
-//   //     fetch("https://booktrade-api.onrender.com/loginuser", {
+//   //     fetch("https://booktrade-backend.vercel.app/loginuser", {
 //   //       headers: {
 //   //         Authorization: "Bearer " + localStorage.getItem("jwt"),
 //   //       },
@@ -179,7 +179,7 @@
 //     if (socket) {
 //       // console.log("Setting up socket event listener");
 //       socket.on("new notification", (newMessageReceived) => {
-//         fetch("https://booktrade-api.onrender.com/loginuser", {
+//         fetch("https://booktrade-backend.vercel.app/loginuser", {
 //           headers: {
 //             Authorization: "Bearer " + localStorage.getItem("jwt"),
 //           },
@@ -218,7 +218,7 @@
 //     try {
 //       const fetchUser = async () => {
 //         const response = await fetch(
-//           "https://booktrade-api.onrender.com/loginuser",
+//           "https://booktrade-backend.vercel.app/loginuser",
 //           {
 //             headers: {
 //               Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -240,7 +240,7 @@
 
 //         // Set up a new socket connection
 //         const ENDPOINT = "http://localhost:5000";
-//         // const ENDPOINT = "https://booktrade-api.onrender.com";
+//         // const ENDPOINT = "https://booktrade-backend.vercel.app";
 
 //         const connectSocket = () => {
 //           const newSocket = io(ENDPOINT);
@@ -360,7 +360,7 @@ export const SocketProvider = ({ children }) => {
 
   // useEffect(() => {
   //   if (socket) {
-  //     fetch("https://booktrade-api.onrender.com/loginuser", {
+  //     fetch("https://booktrade-backend.vercel.app/loginuser", {
   //       headers: {
   //         Authorization: "Bearer " + localStorage.getItem("jwt"),
   //       },
@@ -377,7 +377,7 @@ export const SocketProvider = ({ children }) => {
     if (socket) {
       // console.log("Setting up socket event listener");
       socket.on("new notification", (newMessageReceived) => {
-        fetch("https://booktrade-api.onrender.com/loginuser", {
+        fetch("https://booktrade-backend.vercel.app/loginuser", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("jwt"),
           },
@@ -425,7 +425,7 @@ export const SocketProvider = ({ children }) => {
     try {
       const fetchUser = async () => {
         const response = await fetch(
-          "https://booktrade-api.onrender.com/loginuser",
+          "https://booktrade-backend.vercel.app/loginuser",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -447,7 +447,7 @@ export const SocketProvider = ({ children }) => {
 
         // Set up a new socket connection
         // const ENDPOINT = "http://localhost:5000";
-        const ENDPOINT = "https://booktrade-api.onrender.com";
+        const ENDPOINT = "https://booktrade-backend.vercel.app";
 
         const connectSocket = () => {
           const newSocket = io(ENDPOINT);

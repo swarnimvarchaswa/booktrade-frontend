@@ -13,7 +13,7 @@ function AddReadinglist() {
       return;
     }
 
-    fetch("https://booktrade-api.onrender.com/addreadinglist", {
+    fetch("https://booktrade-backend.vercel.app/addreadinglist", {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
