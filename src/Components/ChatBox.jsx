@@ -408,26 +408,10 @@ export default function ChatBox() {
 
   const chatContainerRef = useRef(null);
 
-  // useEffect(() => {
-
-  //   fetch(`https://booktrade-backend.vercel.app/messageRead/${chatId}`, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching messages:", error);
-  //     });
-  // }, [chatId]);
-
   useEffect(() => {
+
     fetch(`https://booktrade-backend.vercel.app/messageRead/${chatId}`, {
+      method: "put",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -435,15 +419,14 @@ export default function ChatBox() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Error: ${response.statusText} (${response.status})`);
+          throw new Error("Network response was not ok");
         }
       })
       .catch((error) => {
         console.error("Error fetching messages:", error);
-        // Optionally, show this error to the user
-        alert("Failed to mark messages as read. Please try again later.");
       });
   }, [chatId]);
+
 
   // Fetch logged-in user id
   useEffect(() => {
