@@ -14,6 +14,7 @@ function Login() {
   const [passwordError, setPasswordError] = useState("");
   const [overallError, setOverallError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingGuest, setIsLoadingGuest] = useState(false);
 
   const emailRegex = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/; // old regex
 
@@ -66,6 +67,29 @@ function Login() {
           navigate("/");
         }
         // console.log(data);
+      });
+  };
+
+  const postDataGuest = () => {
+
+    setIsLoadingGuest(true);
+
+    //sending data to server
+    fetch("https://booktrade-api.onrender.com/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "booktrade@gmail.com",
+        password: "booktrade",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+          localStorage.setItem("jwt", data);
+          setIsLoading(false);
+          navigate("/");
       });
   };
 
@@ -145,6 +169,28 @@ function Login() {
             {overallError}
           </p>
         )}
+        {/* guest login */}
+        <div className="grid justify-stretch mt-10 font-r tracking-wider ">
+          <button
+            className={`${
+              isLoadingGuest ? "bg-purple-400 py-[1px]" : "bg-white border-2 border-purple-600 text-purple-600 py-3 hover:bg-purple-700 hover:text-white"
+            }  rounded flex items-center justify-center`}
+            onClick={() => {
+              postDataGuest();
+            }}
+            disabled={isLoadingGuest}
+          >
+            {isLoadingGuest ? (
+              <img
+                className="h-10"
+                src="https://cdn.pixabay.com/animation/2022/07/29/03/42/03-42-22-68_512.gif"
+                alt="Loading"
+              />
+            ) : (
+              "Log In as Guest"
+            )}
+          </button>
+        </div>
 
         <div className="flex justify-center mb-4 mt-8 font-r tracking-wide">
           <Link
