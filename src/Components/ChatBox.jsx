@@ -408,6 +408,24 @@ export default function ChatBox() {
 
   const chatContainerRef = useRef(null);
 
+  // useEffect(() => {
+
+  //   fetch(`https://booktrade-backend.vercel.app/messageRead/${chatId}`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching messages:", error);
+  //     });
+  // }, [chatId]);
+
   useEffect(() => {
     fetch(`https://booktrade-backend.vercel.app/messageRead/${chatId}`, {
       headers: {
@@ -417,11 +435,13 @@ export default function ChatBox() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error(`Error: ${response.statusText} (${response.status})`);
         }
       })
       .catch((error) => {
         console.error("Error fetching messages:", error);
+        // Optionally, show this error to the user
+        alert("Failed to mark messages as read. Please try again later.");
       });
   }, [chatId]);
 
@@ -610,7 +630,7 @@ export default function ChatBox() {
           <br />
           <br />
           <p className="font-r text-sm lg:text-base font-normal text-gray-300 mt-auto">
-            Messages will disappear on their own in 24 hr.
+            Messages will disappear on their own in a month.
           </p>
           <br />
 
